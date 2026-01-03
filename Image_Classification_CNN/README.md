@@ -127,4 +127,3 @@ When the Notebook loads the model, it uses a command similar to:
 ```python
 torch.load('best_cifar10_cnn.pt', map_location=device)
 ```
-```
