@@ -12,7 +12,7 @@ This repository is a collection of multiple independent projects (database syste
 | Image Classification (CNN) | PyTorch / torchvision | CIFAR-10 image classification: augmentation, CNN training, best-model saving, evaluation, and visualization. | [Folder](./Image_Classification_CNN) · [README](./Image_Classification_CNN/README.md) |
 | Loan Approval Prediction | scikit-learn / SHAP | Loan approval binary classification: EDA, leakage-free preprocessing, feature engineering, tuning, threshold analysis, and model artifacts. | [Folder](./Loan_Approval_Prediction) · [README](./Loan_Approval_Prediction/README.md) |
 | Portfolio Risk Modeling | R / copula / rugarch | Markowitz portfolio optimization + Copula-based VaR + GARCH volatility & VaR (with plots and outputs). | [Folder](./Portfolio_Risk_Modeling) · [README](./Portfolio_Risk_Modeling/README.md) |
-| Time Series Forecasting (Solar Prosumers) | XGBoost / LSTM / Optuna / TensorFlow | Forecasting prosumers’ electricity consumption and solar generation using XGBoost and LSTM (optional Attention), with a full report. | [Folder](./Time_Series_Forecasting) · [README](./Time_Series_Forecasting/README.md) |
+| Time Series Forecasting (Solar Panel Prosumers) | XGBoost / LSTM / Optuna / TensorFlow | Forecasting prosumers’ electricity consumption and solar generation using XGBoost and LSTM, with a full report. | [Folder](./Time_Series_Forecasting) · [README](./Time_Series_Forecasting/README.md) |
 | Web Scraping & Data Analysis (TVmaze) | requests / BeautifulSoup / statsmodels | Scrape metadata for 200 TV shows from TVmaze to CSV, then run statistical tests and robust regression analyses. | [Folder](./Web_Scraping_Data_Analysis) · [README](./Web_Scraping_Data_Analysis/README.md) |
 
 ---
@@ -22,7 +22,7 @@ This repository is a collection of multiple independent projects (database syste
 - **What it is**: A Microsoft Access `.accdb` project with tables/queries/forms/reports for common workflows (purchase, inventory, sales, and analytics).
 - **Highlights**:
   - End-to-end workflow: purchasing → inventory updates → sales logging → summary reports
-  - Real-time inventory updates to track stock levels and changes promptly
+  - Automatic inventory updates to track stock levels and changes promptly
 - **Entry**:
   - [Project folder](./Books_Management_System)
   - [Project README](./Books_Management_System/README.md)
@@ -33,8 +33,8 @@ This repository is a collection of multiple independent projects (database syste
 
 - **What it is**: A full notebook pipeline: environment checks → data loading/preprocessing → CNN modeling → train/val → save best model → test evaluation → inference visualization.
 - **Highlights**:
-  - Training curves and evaluation metrics are tracked to compare model behavior across epochs
-  - Includes qualitative visualization (sample predictions) to quickly sanity-check model performance
+  - Reports overall test accuracy and per-class accuracy across all 10 CIFAR-10 classes
+  - Visualizes inference results with correctly vs. incorrectly predicted samples for quick sanity checks
 - **Entry**:
   - [Project folder](./Image_Classification_CNN)
   - [Project README](./Image_Classification_CNN/README.md)
@@ -67,7 +67,7 @@ This repository is a collection of multiple independent projects (database syste
 
 ## Time Series Forecasting (Solar Panel Prosumers)
 
-- **What it is**: Forecasts both consumption and generation for solar prosumers using two model families: XGBoost and LSTM (optional Attention). Includes a PDF report summarizing results.
+- **What it is**: Forecasts both consumption and generation for solar panel prosumers using two model families: XGBoost and LSTM. Includes a PDF report summarizing results.
 - **Highlights**:
   - XGBoost uses Optuna with 5-fold TimeSeriesSplit for hyperparameter search, and exports the best model as JSON plus a performance report to Excel (with timestamped result folders)
   - LSTM builds sequences with a 24-hour sliding window, supports optional Self-Attention, and trains with EarlyStopping / ReduceLROnPlateau / ModelCheckpoint alongside 5-fold TimeSeriesSplit cross-validation
