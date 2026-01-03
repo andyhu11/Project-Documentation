@@ -77,7 +77,7 @@ This repository is a collection of multiple independent projects (database syste
 
 ---
 
-## 6) Web Scraping & Data Analysis (TVmaze)
+## · Web Scraping & Data Analysis (TVmaze)
 
 - **What it is**: Notebook in two parts:
   1) Scrape 200 TV shows from TVmaze (collect links → crawl metadata → export fixed-schema CSV)
