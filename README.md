@@ -46,7 +46,7 @@ This repository is a collection of multiple independent projects (database syste
 - **What it is**: End-to-end ML project: EDA, visualization, leakage-free preprocessing, feature engineering, multi-model tuning, SHAP explainability, threshold strategy analysis, and exporting artifacts.
 - **Highlights**:
   - Models compared: Logistic Regression / Random Forest / SVM (ROC-AUC as the main tuning metric)
-  - Outputs saved under `./artifacts/` (joblib model, threshold json, metrics json)
+  - Threshold policy analysis: scans decision thresholds and reports operating points (e.g., cautious vs. balanced) with precision/recall/F1 trade-offs
 - **Entry**:
   - [Project folder](./Loan_Approval_Prediction)
   - [Project README](./Loan_Approval_Prediction/README.md)
@@ -57,8 +57,8 @@ This repository is a collection of multiple independent projects (database syste
 
 - **What it is**: Uses daily stock returns to perform mean-variance portfolio analysis (GMV/tangency/constrained portfolios), Copula VaR via Monte Carlo + rolling backtests, and GARCH(1,1) conditional volatility & VaR.
 - **Highlights**:
-  - Multiple key plots: return series, distributions, efficient frontier, conditional volatility, etc.
-  - Clear structure for data and outputs (`data/`, `output_picture/`)
+  - Copula-based VaR via Monte Carlo, including rolling-window backtesting with breach counting and a binomial test
+  - Automatically engineers log returns from raw prices and exports a reusable returns dataset for downstream modeling
 - **Entry**:
   - [Project folder](./Portfolio_Risk_Modeling)
   - [Project README](./Portfolio_Risk_Modeling/README.md)
@@ -69,8 +69,8 @@ This repository is a collection of multiple independent projects (database syste
 
 - **What it is**: Forecasts both consumption and generation for solar prosumers using two model families: XGBoost and LSTM (optional Attention). Includes a PDF report summarizing results.
 - **Highlights**:
-  - Unified metrics: MSE / RMSE / MAE / R² / MAPE
-  - XGBoost tuning with Optuna + TimeSeriesSplit; LSTM uses sliding windows and training strategies (e.g., early stopping)
+  - XGBoost uses Optuna with 5-fold TimeSeriesSplit for hyperparameter search, and exports the best model as JSON plus a performance report to Excel (with timestamped result folders)
+  - LSTM builds sequences with a 24-hour sliding window, supports optional Self-Attention, and trains with EarlyStopping / ReduceLROnPlateau / ModelCheckpoint alongside 5-fold TimeSeriesSplit cross-validation
 - **Entry**:
   - [Project folder](./Time_Series_Forecasting)
   - [Project README](./Time_Series_Forecasting/README.md)
