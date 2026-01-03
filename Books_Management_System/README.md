@@ -1,8 +1,9 @@
+```markdown
 # Books Management System
 
 > A Microsoft Access (`.accdb`) based book management system for **stock-in, inventory, and sales statistics**.  
 > Database file: `BooksManagementSystem.accdb`  
-> Demo document: `BooksManagementSystem.pdf` (includes the full walkthrough and screenshots)
+> Operating Manual: `BooksManagementSystem_Operating Manual.pdf` (includes the full walkthrough and screenshots)
 
 ---
 
@@ -50,7 +51,7 @@ Typical use cases:
 - Username: `admin`
 - Password: `admin`
 
-> For the login entry and UI steps, see the section “Information Login / Operation Selection” in `BooksManagementSystem.pdf`.
+> For the login entry and UI steps, see the section “Information Login / Operation Selection” in `BooksManagementSystem_Operating Manual.pdf`.
 
 ---
 
@@ -71,12 +72,12 @@ Typical use cases:
 
 1. Make sure the following files are in the **same folder**:
    - `BooksManagementSystem.accdb`
-   - `BooksManagementSystem.pdf` (demo & operation guide)
+   - `BooksManagementSystem_Operating Manual.pdf` (operating manual & demo guide)
 2. Double-click to open: `BooksManagementSystem.accdb`
 3. If you see a security warning:
    - Click **Enable Content**
    - Add the project folder to **Trusted Locations**
-4. Log in with `admin/admin`, then select modules from the main menu (see the PDF for screenshots and step-by-step demo).
+4. Log in with `admin/admin`, then select modules from the main menu (see the operating manual for screenshots and step-by-step demo).
 
 ---
 
@@ -110,4 +111,5 @@ Typical use cases:
 ## 8. Project Structure
 
 - `BooksManagementSystem.accdb` — main database file (tables/queries/forms/reports/macros/VBA)
-- `BooksManagementSystem.pdf` — demo walkthrough & feature guide (kept in the same folder as the accdb)
+- `BooksManagementSystem_Operating Manual.pdf` — operating manual & demo walkthrough (kept in the same folder as the accdb)
+```
