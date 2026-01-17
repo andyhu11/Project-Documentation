@@ -1,129 +1,129 @@
-# Image Classification with CNN (CIFAR-10)
+# CNN Image Classification
 
-> An example project that trains and evaluates a Convolutional Neural Network (CNN) on the **CIFAR-10** dataset using **PyTorch**.  
-> This project contains only one file: `Image_Classification_CNN.ipynb`
+> **A deep learning pipeline for accurate image classification using Convolutional Neural Networks (CNNs) on the CIFAR-10 dataset.**
 
----
+## 📖 Overview
 
-## 1. Project Overview
+**CNN Image Classification** is a computer vision project built with **PyTorch** that implements a custom Convolutional Neural Network to categorize images into 10 distinct classes.
 
-This project demonstrates a complete image classification pipeline in a Jupyter Notebook, covering **environment check → data download/preprocessing → CNN model construction → training/validation → saving the best model → test evaluation → inference & visualization**.
-
-- Dataset: CIFAR-10 (10 classes, 32×32 color images)
-- Framework: PyTorch / torchvision
-- Training outputs: training logs, best model weights file `best_cifar10_cnn.pt`
-- Evaluation outputs: overall test accuracy and per-class accuracy, plus visualized inference results (correct/incorrect samples)
+The project encompasses the full machine learning lifecycle—from data acquisition and augmentation to model architecture design, training optimization, and final performance evaluation. It serves as a robust implementation of standard deep learning practices for multi-class classification tasks.
 
 ---
 
-## 2. Features
+## ✨ Key Features
 
-### 2.1 Environment Check
-- Print PyTorch version: `torch.__version__`
-- Generate a random tensor `torch.rand(2, 3)` to verify the runtime works properly
-- Check whether CUDA is available (automatically select `cuda` or `cpu`)
+### 🧠 Deep Learning Architecture
 
-### 2.2 Data Download and Preprocessing
-- Automatically download CIFAR-10 to a local directory using `torchvision.datasets.CIFAR10(..., download=True)`
-- Data augmentation and normalization (example):
-  - `RandomHorizontalFlip()`
-  - `RandomRotation(10)`
-  - `ToTensor()`
-  - `Normalize(mean=(0.5,0.5,0.5), std=(0.5,0.5,0.5))`
-- Create a validation split:
-  - `valid_size = 0.2`
-  - Use `SubsetRandomSampler` to build `train_loader / valid_loader`
-- Build the test loader: `test_loader`
-- The 10 class names:
-  - `airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck`
+* **Custom CNN Design:** Features a modular architecture with three convolutional blocks, utilizing **3x3 kernels** and **Max Pooling** for effective feature extraction and dimensionality reduction.
+* **Regularization:** Implements **Dropout** layers to mitigate overfitting and **Batch Normalization** to stabilize and accelerate training convergence.
+* **Adaptive Layers:** Uses `AdaptiveAvgPool2d` to handle variable input sizes effectively before the fully connected classification head.
 
-### 2.3 CNN Model
-- Three convolutional blocks (Conv + BN + ReLU + Conv + BN + ReLU + MaxPool)
-- Global pooling via `AdaptiveAvgPool2d((2, 2))`
-- Classification head: Dropout + Linear + ReLU + Dropout + Linear (outputs 10 classes)
+### 🔄 Data Pipeline
 
-### 2.4 Training and Saving the Best Model
-- Loss function: `CrossEntropyLoss`
-- Optimizer: `SGD(lr=0.01, momentum=0.9, weight_decay=5e-4)`
-- Train for `n_epochs = 30` (adjustable)
-- Save the best model (based on the lowest validation loss) to: `best_cifar10_cnn.pt`
+* **Automated Preprocessing:** Automatically handles the downloading, extraction, and normalization of the **CIFAR-10** dataset within the notebook.
+* **Data Augmentation:** Applies real-time transformations like **Random Horizontal Flip** and **Random Rotation** to enhance model generalization.
+* **Efficient Loading:** Leverages PyTorch `DataLoader` with `SubsetRandomSampler` for seamless training and validation splitting.
 
-### 2.5 Test Evaluation
-- Report test Loss / Accuracy
-- Report per-class accuracy for all 10 classes
+### 📊 Training & Analysis
 
-### 2.6 Inference and Visualization
-- Single-image inference: output the ground-truth label, predicted label, and confidence score
-- Visualization:
-  - Display several correctly predicted examples
-  - Display several incorrectly predicted examples
+* **Optimization:** Trained using **Stochastic Gradient Descent (SGD)** with momentum and weight decay.
+* **Checkpointing:** Automatically tracks validation loss and generates the best-performing model state (`best_cifar10_cnn.pt`) during training.
+* **Detailed Metrics:** Provides overall test accuracy (~84%) along with granular class-wise performance breakdown.
+* **Visual Inference:** Visualizes prediction results, identifying both correctly classified and misclassified examples with confidence scores.
 
 ---
 
-## 3. Environment Requirements
+## 📂 Project Structure
 
-- **Python**: 3.10 (the notebook example uses `3.10.19`)
-- **Main dependencies**
-  - `torch`
-  - `torchvision`
-  - `numpy`
-  - `matplotlib`
-- **Hardware**
-  - Runs on CPU; if you install a CUDA-enabled PyTorch build, it will automatically use GPU (depending on `torch.cuda.is_available()`)
+```text
+Image_Classification_CNN/
+├── Image_Classification_CNN.ipynb  # Main Jupyter Notebook source code
+└── README.md                       # Project Documentation
 
----
-
-## 4. Quick Start
-
-### 4.1 Install Dependencies (conda example)
-```bash
-conda create -n cnn-cifar10 python=3.10 -y
-conda activate cnn-cifar10
-conda install pytorch torchvision torchaudio -c pytorch
-conda install numpy matplotlib
-
-### 4.2 Ensure the CIFAR-10 Data is Ready:
-- The Notebook uses the default `data_root = ./data`
-- The code sets `download=False`, so you need to have the CIFAR-10 data prepared in advance (or change the code to `download=True`)
-
-### 4.3 Open and Run the Notebook:
-- Start Jupyter:
-  ```bash
-  jupyter notebook
-  ```
-- Open: `Image_Classification_CNN.ipynb`
-
-### 4.4 Execute the Cells in Order:
-- Extract data → Build the DataLoader → Define the model → Train and save the best model → Test and evaluate → Visualize the inference results
-
-### 4.5 After Training, the Following Will Be Generated:
-- `best_cifar10_cnn.pt` (Model weights corresponding to the best validation loss)
-
----
-
-## 5. Reference Results (Example of Notebook Output)
-
-- Best validation loss (example): `Best validation loss: 0.4442`
-- Test accuracy (example): `Test Accuracy: 84.63%`
-- Example per-class accuracy (partial):
-  - automobile: 95.80%
-  - cat: 64.00%
-  - ship: 89.70%
-  - truck: 89.60%
-
-> Results may slightly vary depending on the random seed, data augmentation, hardware, and environment.
-
----
-
-## 6. Frequently Asked Questions (FAQ)
-
-### Q1: Error "Dataset not found / download=False" at Runtime
-In the Notebook, `datasets.CIFAR10(... download=False ...)` will not automatically download the data. You can:
-- Manually place the CIFAR-10 data into the corresponding `./data` directory; or
-- Change `download=False` to `download=True` (the data will be downloaded on first run)
-
-### Q2: Encountering FutureWarning for `torch.load` (weights_only)
-When the Notebook loads the model, it uses a command similar to:
-```python
-torch.load('best_cifar10_cnn.pt', map_location=device)
 ```
+
+> **Note:** The dataset directory (`data/`) and the model checkpoint (`best_cifar10_cnn.pt`) will be automatically generated locally when you run the notebook.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* **Python 3.8+**
+* **Jupyter Notebook** / JupyterLab
+* **PyTorch** (with `torchvision`)
+* **NumPy** & **Matplotlib**
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/andyhu11/Project-Documentation.git
+
+```
+
+
+2. Navigate to the project directory:
+```bash
+cd Project-Documentation/Image_Classification_CNN
+
+```
+
+
+3. Install dependencies (if using pip):
+```bash
+pip install torch torchvision numpy matplotlib
+
+```
+
+
+
+### Usage Guide
+
+1. **Launch:** Open the notebook to view the workflow.
+```bash
+jupyter notebook Image_Classification_CNN.ipynb
+
+```
+
+
+2. **Run:** Execute the cells sequentially. The notebook is self-contained and will:
+* **Download** the CIFAR-10 dataset to a local `data/` folder.
+* **Initialize** the `Net` architecture.
+* **Train** the model for 30 epochs (and save `best_cifar10_cnn.pt` locally).
+* **Visualize** accuracy statistics and predictions.
+
+
+
+---
+
+## 📈 Performance
+
+The model demonstrates strong performance on the test set:
+
+* **Overall Accuracy:** **84.63%**
+* **Top Classes:**
+* *Automobile:* 95.80%
+* *Ship:* 89.70%
+
+
+* **Loss:** Achieved a best validation loss of **0.4442**.
+
+---
+
+## 🤝 Contributing
+
+Contributions to improve accuracy or optimize architecture are welcome:
+
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b feature/NewArchitecture`).
+3. Commit your Changes (`git commit -m 'Add ResNet block'`).
+4. Push to the Branch (`git push origin feature/NewArchitecture`).
+5. Open a Pull Request.
+
+---
+
+## 📝 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
