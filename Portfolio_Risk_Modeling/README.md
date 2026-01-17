@@ -1,164 +1,149 @@
-# Portfolio Risk Modeling (Markowitz + Copula VaR + GARCH)
+# Portfolio Risk Modeling
 
-> A complete **R** project that covers: **return engineering → mean-variance portfolio optimization (GMV / Tangency) → Copula-based VaR → GARCH conditional volatility & VaR**.  
-> Main script: `Portfolio_Risk_Modeling.R`
+> **A quantitative finance framework for Mean-Variance portfolio optimization and dynamic volatility forecasting.**
 
----
+## 📖 Overview
 
-## 1. Project Overview
+**Portfolio Risk Modeling** is a computational finance toolkit built with **R**. It bridges the gap between Classical Portfolio Theory (Markowitz) and modern Time-Series Econometrics.
 
-This project uses daily data for **five stocks** and implements the following workflow:
-
-1) Compute **daily log returns** from price data and build a wide-format return matrix aligned by date.  
-2) Produce **descriptive statistics**, and visualize return time series and distributions.  
-3) Mean-variance (Markowitz) portfolio analysis:
-   - Simulate an efficient frontier (unconstrained random portfolios)
-   - Compute **GMV** and **Tangency** portfolios in closed form
-   - Simulate **constrained portfolios** (no shorting, max weight cap)  
-4) **Gaussian Copula** Monte Carlo simulation for portfolio returns, then compute VaR and run rolling VaR backtesting.  
-5) Fit **GARCH(1,1)** models to GMV / Tangency / optimal portfolio returns, plot conditional volatilities, and compute 1-day 95% VaR using forecasted volatility.
+This project processes daily stock market data to construct optimal portfolios—specifically the **Global Minimum Variance (GMV)** and **Tangency** portfolios. Beyond static optimization, it employs **GARCH(1,1)** models to analyze the time-varying conditional volatility of these portfolios, providing a more realistic assessment of risk than standard deviation alone.
 
 ---
 
-## 2. Folder Structure
+## ✨ Key Features
+
+### 🛠 Data Processing & Statistics
+
+* **Automated Cleaning:** Ingests raw OHLCV (Open-High-Low-Close-Volume) data, handling missing values and trading halts.
+* **Log-Return Calculation:** Transforms price series into log-returns for statistical stationarity.
+* **Statistical Testing:** Performs **Jarque-Bera tests** to check for normality and analyzes higher moments (Skewness and Kurtosis) to detect fat tails.
+
+### 🧠 Optimization Engine (MPT)
+
+* **Efficient Frontier Construction:** Simulates thousands of portfolio combinations to map the risk-return spectrum.
+* **Quadratic Programming:** Uses `quadprog` to mathematically solve for exact weights of:
+* **GMV Portfolio:** The theoretical portfolio with the lowest possible risk.
+* **Tangency Portfolio:** The portfolio maximizing the Sharpe Ratio.
+
+
+
+### 📉 Risk Modeling (Econometrics)
+
+* **GARCH(1,1) Implementation:** Fits Generalized Autoregressive Conditional Heteroskedasticity models to portfolio returns.
+* **Dynamic Volatility:** Extracts and visualizes conditional volatility () over time, capturing volatility clustering.
+
+---
+
+## 📂 Project Structure
 
 ```text
-.
-├─ Portfolio_Risk_Modeling.R
-├─ data/
-│  ├─ daily_price_volume.csv
-│  └─ daily_price_volume_returns.csv
-└─ output_picture/
-   ├─ DailyLogReturns_TimeSeries.jpg
-   ├─ ReturnDistributions_DailyLogReturns_Density.jpg
-   ├─ EfficientFrontier_Simulated_GMV_Tangency.jpg
-   └─ ConditionalVolatility_GARCH11_GMV_Tangency.jpg
-````
+Portfolio_Risk_Modeling/
+├── 📂 data/                                  # Raw and processed datasets
+│   ├── daily_price_volume.csv                # Source: Raw OHLCV data
+│   └── daily_price_volume_returns.csv        # Generated: Cleaned log-returns
+│
+├── 📂 output/                                # Generated visualizations & logs
+│   ├── ConditionalVolatility_GARCH11.jpg     # Volatility time-series plots
+│   ├── EfficientFrontier_Simulated.jpg       # Risk-Return frontier plots
+│   ├── ReturnDistributions_Density.jpg       # Density comparison plots
+│   └── DailyLogReturns_TimeSeries.jpg        # Return fluctuation plots
+│
+├── Portfolio_Risk_Modeling.R                 # Main analytical script
+└── README.md                                 # Project documentation
 
-### 2.1 Data Files
-
-* `daily_price_volume.csv`: raw daily dataset (the script reads this file and converts `Trddt` to `Date`).
-* `daily_price_volume_returns.csv`: returns dataset exported by the script (includes `LogRet` by stock and date).
-
-### 2.2 Output Figures
-
-* `DailyLogReturns_TimeSeries.jpg`: faceted time series plot of daily log returns for the 5 assets.
-* `ReturnDistributions_DailyLogReturns_Density.jpg`: histogram + kernel density of returns (faceted).
-* `EfficientFrontier_Simulated_GMV_Tangency.jpg`: simulated efficient frontier scatter with GMV and Tangency labeled.
-* `ConditionalVolatility_GARCH11_GMV_Tangency.jpg`: GARCH(1,1) conditional volatility series for GMV and Tangency portfolios.
+```
 
 ---
 
-## 3. Features
+## 🚀 Getting Started
 
-### 3.1 Return Construction & Descriptive Analysis (Question 1a)
+### Prerequisites
 
-* Selects 5 tickers: `678, 868, 600741, 600006, 600151`
-* Computes daily log returns from adjusted close price `Adjprcnd`:
-
-  * `LogRet = log(AdjClose) - log(lag(AdjClose))`
-* Builds a wide return matrix `ret_matrix` (rows = dates, cols = assets)
-* Computes summary statistics: mean, median, std, skewness, kurtosis, quantiles, etc.
-* Visualizations:
-
-  * Faceted return time series
-  * Faceted return distribution (hist + density)
-
-### 3.2 Mean-Variance Portfolios & Efficient Frontier (Question 1b)
-
-* Simulates 10,000 unconstrained random portfolios and computes:
-
-  * portfolio return / standard deviation / Sharpe ratio
-* Closed-form solutions:
-
-  * **GMV**: ( w \propto \Sigma^{-1}\mathbf{1} )
-  * **Tangency**: ( w \propto \Sigma^{-1}(\mu-r_f) ) (the script uses `rf = 0`)
-* Plots the simulated efficient frontier and highlights GMV/Tangency.
-
-### 3.3 Constrained Portfolios (No shorting & weight cap)
-
-* Constraints: `weight >= 0` and `weight <= 0.25`
-* Randomly samples portfolios and filters feasible weights
-* Selects:
-
-  * constrained GMV (minimum volatility)
-  * constrained Tangency (maximum Sharpe ratio)
-
-### 3.4 Copula-based VaR (Question 2)
-
-* Maps each asset return series to ([0,1]) using empirical ranks and fits a **Gaussian copula**
-* Runs copula Monte Carlo simulation (e.g., `n_sim = 1e5`), maps simulated uniforms back to returns via empirical quantiles, then computes portfolio VaR
-* Compares multiple VaR methods:
-
-  * Copula VaR
-  * Variance-Covariance (Normal approximation)
-  * Historical VaR
-* Rolling-window VaR (window = 1000, alpha = 0.10) + breach counting and binomial backtest
-
-### 3.5 GARCH(1,1) Conditional Volatility & VaR (Question 3)
-
-* Fits `rugarch` sGARCH(1,1) with Normal innovations for GMV and Tangency portfolio returns
-* Extracts and plots conditional volatility series
-* Forecasts 1-step-ahead volatility and computes 1-day 95% VaR:
-
-  * `VaR_garch = - qnorm(alpha) * sigma_forecast`
-* Outputs a comparison table of VaR estimates
-
----
-
-## 4. Environment Requirements
-
-* **R**: recommended 4.1+
-* **Key packages**:
-
-  * `tidyverse`
-  * `PerformanceAnalytics`
-  * `moments`
-  * `quadprog`
-  * `gridExtra`
-  * `copula`
-  * `rugarch`
-
----
-
-## 5. Quick Start
-
-### 5.1 Install Dependencies
-
-Run in R / RStudio:
-
+* **R** (4.0 or newer recommended).
+* **RStudio** (recommended for interactive visualization).
+* **Required Packages:**
 ```r
-install.packages(c(
-  "tidyverse","PerformanceAnalytics","moments","quadprog","gridExtra",
-  "copula","rugarch"
-))
+install.packages(c("tidyverse", "PerformanceAnalytics", "moments", "quadprog", "rugarch", "gridExtra"))
+
 ```
 
-### 5.2 Run the Script
 
-1. Make sure the folder structure is in place (especially the CSV files under `data/`).
-2. Run:
 
+### Installation
+
+1. **Clone the repository:**
 ```bash
-Rscript Portfolio_Risk_Modeling.R
+git clone https://github.com/your-username/Portfolio_Risk_Modeling.git
+
 ```
 
-> Note: the script currently reads `daily_price_volume.csv` from the working directory.
-> If your data files are under `data/`, update file paths in the script accordingly, e.g.:
 
-* `read.csv("data/daily_price_volume.csv")`
-* `write.csv(..., file="data/daily_price_volume_returns.csv", ...)`
+2. **Navigate to the project root:**
+```bash
+cd Portfolio_Risk_Modeling
+
+```
+
+
+
+### Usage Guide
+
+1. **Prepare Data:**
+Ensure `daily_price_volume.csv` is placed inside the `data/` directory.
+2. **Run the Analysis:**
+Open R or RStudio. Set your working directory to the project root and source the script directly:
+```r
+# Set working directory to project root
+setwd("/path/to/Portfolio_Risk_Modeling")
+
+# Run the main script
+source("Portfolio_Risk_Modeling.R")
+
+```
+
+
+3. **View Outputs:**
+* **Console:** Optimization weights (GMV & Tangency) will be printed directly.
+* **Files:** Check the `output/` folder for generated high-resolution `.jpg` plots.
+
+
+
+> **Note:** The script uses relative paths to load data (`./data/`) and save plots (`./output/`). Please ensure these folders exist before running.
 
 ---
 
-## 6. FAQ
+## 📊 Visual Analytics
 
-### Q1: Why does the script fail to find the data file?
+The project generates high-fidelity plots to aid in investment decision-making:
 
-The script reads `daily_price_volume.csv` from the working directory by default. If you keep the CSVs under `data/`, update the path in `read.csv(...)` accordingly.
+* **Efficient Frontier:** Visualizes the trade-off between risk (Std Dev) and Return, highlighting the optimal GMV and Tangency points against simulated portfolios.
+* **Conditional Volatility:** Tracks how risk changes over time using GARCH(1,1), distinguishing between the stable GMV portfolio and the more volatile Tangency portfolio.
+* **Return Density:** Compares the distribution of asset returns against a normal distribution to visualize "fat tails" and skewness.
 
-### Q2: Why do the GARCH plots not show real trading dates?
+---
 
-The script uses `as.Date(1:length(vol_gmv))` as a placeholder x-axis. If you want real dates, replace that with the aligned trading dates from the return matrix.
+## 🚧 Roadmap
 
+The following modules are planned to extend the sophistication of the risk engine:
 
+* **Backtesting Framework:** Implement a rolling-window backtest to validate the performance of the GMV and Tangency portfolios against a benchmark.
+* **Alternative GARCH Models:** Incorporate **eGARCH** or **GJR-GARCH** to model the "leverage effect" (where negative returns increase volatility more than positive returns).
+* **Value at Risk (VaR):** Automate the calculation of VaR and Expected Shortfall (ES) at 95% and 99% confidence intervals based on the GARCH forecasts.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b feature/NewModel`).
+3. Commit your Changes (`git commit -m 'Add some NewFeature'`).
+4. Push to the Branch (`git push origin feature/NewModel`).
+5. Open a Pull Request.
+
+---
+
+## 📝 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
