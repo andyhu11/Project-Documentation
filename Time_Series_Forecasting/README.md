@@ -2,7 +2,7 @@
 
 > **A machine learning pipeline utilizing LSTM and XGBoost to predict electricity consumption and production behaviors of solar panel prosumers.**
 
-## 📖 Overview
+## ⚡ Overview
 
 **Solar Prosumer Energy Forecasting** is a predictive analytics project designed to address the energy imbalance issues inherent in modern smart grids. Leveraging the **Enefit** dataset, this project aims to minimize the "energy imbalance cost" by accurately forecasting how prosumers (consumers who also produce energy) behave.
 
@@ -62,7 +62,7 @@ Time_Series_Forecasting/
 │   ├── LSTM_production_model.py                # Deep Learning training script (Production)
 │   ├── xgboost_consumption_model.py            # Gradient Boosting script (Consumption)
 │   └── xgboost_production_model.py             # Gradient Boosting script (Production)
-├── Time Series Forecasting of Energy Behavior.pdf # Full Project Report & Methodology
+├── Time Series Forecasting of Energy Behavior in Solar Panel Prosumers.pdf # Full Project Report
 └── README.md                                   # Project Documentation
 
 ```
@@ -132,7 +132,7 @@ python xgboost_production_model.py
 
 *This script initiates the Optuna study to find the best hyperparameters before training the final booster.*
 
-> **Note:** For a deep dive into the mathematical theory, feature importance analysis, and result interpretation, please refer to the **[Project Report](https://www.google.com/search?q=./Time%2520Series%2520Forecasting%2520of%2520Energy%2520Behavior.pdf)** located in the root of this folder.
+> **Note:** For a deep dive into the mathematical theory, feature importance analysis, and result interpretation, please refer to the **[Project Report PDF](https://github.com/andyhu11/Project-Documentation/blob/main/Time_Series_Forecasting/Time%20Series%20Forecasting%20of%20Energy%20Behavior%20in%20Solar%20Panel%20Prosumers.pdf)** included in this repository.
 
 ---
 
