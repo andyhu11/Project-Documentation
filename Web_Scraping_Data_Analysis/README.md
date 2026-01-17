@@ -1,163 +1,126 @@
-# Web Scraping & Data Analysis (TVmaze)
+# Web Scraping & Data Analysis
 
-> A Jupyter Notebook project that **scrapes TVmaze** to collect metadata for **200 TV shows**, then performs **statistical analysis and visualization** on the exported dataset.  
-> This project contains a single file: `Web Scraping & Data Analysis.ipynb`
+> **A comprehensive data pipeline and analytical framework for investigating TV show trends, longevity, and audience reception.**
 
----
+## 📖 Overview
 
-## 1. Project Overview
+**Web Scraping & Data Analysis** is a Python-based research project designed to harvest, clean, and analyze entertainment media data. Leveraging the **TVmaze API**, this tool automates the collection of dataset specifications including air dates, ratings, and network metadata.
 
-This notebook is organized into two main parts:
-
-- **Task 1 — Web Scraping**  
-  Collects **200 show entry links** from TVmaze listing pages, then visits each show page to scrape metadata and export a CSV in a fixed schema.
-
-- **Task 2 — Data Analysis**  
-  Loads the exported CSV, performs feature engineering (e.g., decade, duration, status, network/platform, genre dummies), and applies **non-parametric tests** and **robust regression (HC3)** to study differences in ratings across decades and key covariates, along with visualizations.
-
-**Source**: TVmaze (example seed pages include shows / popularity / rating / calendar / seasons)  
-**Final CSV columns (strict order)**:  
-`Title, First air date, End date, Rating, Genres, Status, Network, Summary`
+The project moves beyond simple data collection to perform rigorous statistical analysis, testing hypotheses regarding "Golden Age" television windows, the correlation between show longevity and ratings, and the performance gap between concluded and ongoing series.
 
 ---
 
-## 2. Features
+## ✨ Key Features
 
-### 2.1 Task 1 — Web Scraping Pipeline
-- **Requesting & parsing**
-  - Uses `requests.Session()` to reuse connections + custom headers (User-Agent / Referer, etc.)
-  - Parses HTML with `BeautifulSoup`
-  - Basic retry logic and timeouts
-  - **Random request delays** (`REQUEST_DELAY`) to reduce load
+### 🛠 Data Engineering
 
-- **Entry link collection**
-  - Extracts and deduplicates `/shows/<id>` show links from multiple seed listing pages
-  - Automatically discovers pagination (supports both `?page=` and `/page/` patterns)
-  - Outputs: `entrylinks.csv`
+* **Automated Scraper:** A robust collection engine that interfaces with TVmaze to fetch canonical show data.
+* **Data Serialization:** Automatically structures and exports raw data into machine-readable formats (`.csv`) for downstream analysis.
+* **Attribute Extraction:** Captures critical metadata including:
+* **Lifecycle:** First Air Date, End Date, Status (Running/Ended).
+* **Reception:** Weighted Ratings.
+* **Classification:** Genres, Network, and Summaries.
 
-- **Show page metadata harvesting**
-  - Extracts: Title / Summary / Rating / Genres / Status / Network
-  - Aggregates air dates via the **episodes** page to compute:
-    - `First air date` (earliest episode date)
-    - `End date` (latest episode date)
-  - Provides fallbacks for missing values (e.g., tries premiered/ended fields on the show page)
-  - Exports a strict-schema CSV: `output.csv` (with assertions for row count and column order)
 
-### 2.2 Task 2 — Data Analysis
-- **Data cleaning & feature engineering**
-  - Type conversions (numeric rating, parsed dates, etc.)
-  - Builds key features such as `duration_years` and `decade`
-  - Parses `Genres` and creates genre dummy variables (frequency-filtered)
-  - Aggregates `Network` into Top-N groups (others mapped to `Other`)
-  - Creates an analysis-ready dataframe (`df_an`)
 
-- **Exploratory Data Analysis (EDA)**
-  - Checks temporal coverage (whether the sample skews toward recent decades)
-  - Visualizes rating distributions and trends by decade (optionally with smoothing)
+### 📊 Analytical Insights
 
-- **Statistical testing (primarily non-parametric)**
-  - Overall decade differences: **Kruskal–Wallis**
-  - Pairwise post-hoc: **Dunn test + BH (FDR) correction**
-    - Prefers `scikit-posthocs`, with a fallback implementation if unavailable
-  - Status differences (e.g., Ended vs Running): **Mann–Whitney U** (with effect size reporting)
+* **Temporal Analysis (The "Golden Window"):**
+* Evaluates premiere years to identify eras of peak critical reception.
+* *Finding:* Statistical evidence (H=36.92) suggests the **1990s** hold a significant regression advantage over the 2010s, challenging the "modern golden age" hypothesis.
 
-- **Regression modeling with robust inference**
-  - OLS with **HC3** robust standard errors
-  - Typical controls: decade fixed effects (decade dummies), duration, status, Top-N network/platform, genre dummies
-  - Outputs model summaries (and optional condition number checks)
-  - Optional visualizations (e.g., adjusted status effects)
+
+* **Status Comparative Study:**
+* Compares audience reception between **Ended** and **Running** shows.
+* *Finding:* Ended shows demonstrate a statistically significant higher median rating (7.90) compared to running shows (7.50).
+
+
+* **Longevity vs. Quality:**
+* Investigates the "Longer is Better" hypothesis using linear duration terms.
+* *Finding:* The analysis reveals a non-linear "Early Rise — Mid Plateau — Late Decline" pattern, debunking the myth that longevity guarantees higher ratings.
+
+
 
 ---
 
-## 3. Environment Requirements
+## 📂 Project Structure
 
-- **Python**: 3.9+ recommended (standard scientific Python stack)
-- **Core dependencies**
-  - Scraping: `requests`, `beautifulsoup4`
-  - Data: `pandas`, `numpy`
-  - Plotting: `matplotlib`, `seaborn`
-  - Stats: `scipy`, `statsmodels`
-  - Optional: `scikit-posthocs` (for Dunn post-hoc tests; the notebook includes an install hint cell)
+```text
+Web_Scraping_Data_Analysis/
+├── Web Scraping & Data Analysis.ipynb   # Main Jupyter Notebook (Scraping & Analysis logic)
+└── README.md                            # Project Documentation
 
-- **Runtime notes**
-  - Task 1 requires internet access to reach TVmaze
-  - CPU is sufficient; dataset size is small (200 rows)
-
----
-
-## 4. Quick Start
-
-### 4.1 Install dependencies (pip example)
-```bash
-python -m venv .venv
-# Windows: .venv\Scripts\activate
-source .venv/bin/activate
-
-pip install -U pip
-pip install requests beautifulsoup4 pandas numpy matplotlib seaborn scipy statsmodels
-# Optional (recommended) for Dunn post-hoc tests
-pip install scikit-posthocs
-````
-
-### 4.2 Run the notebook
-
-```bash
-jupyter notebook
 ```
 
-Open and run: `Web Scraping & Data Analysis.ipynb`
+---
 
-### 4.3 Recommended execution order
+## 🚀 Getting Started
 
-1. **Task 1**: Run scraping and export cells first
+### Prerequisites
 
-   * Generates `entrylinks.csv`
-   * Then generates `output.csv` (strictly 200 rows, 8 columns)
-2. **Task 2**: Load `output.csv` and run the analysis, statistical tests, regression, and visualizations
+* **Python 3.x**
+* **Jupyter Notebook** or **JupyterLab**
+* **Required Libraries:**
+* `pandas` (Data manipulation)
+* `requests` (HTTP requests)
+* `scipy` (Statistical testing)
+* `matplotlib` / `seaborn` (Visualization)
+
+
+
+### Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/your-username/Project-Documentation.git
+
+```
+
+
+2. Navigate to the project directory:
+```bash
+cd Project-Documentation/Web_Scraping_Data_Analysis
+
+```
+
+
+
+### Usage Guide
+
+1. **Launch the Notebook:**
+Open `Web Scraping & Data Analysis.ipynb` in your Jupyter environment.
+2. **Execute Task 1 (Scraping):**
+Run the initial cells to fetch fresh data from TVmaze.
+> *Note: This process will generate a local output file named `Jiahui.Hu+2252518.csv` containing the raw dataset.*
+
+
+3. **Execute Task 2 (Analysis):**
+Run the subsequent cells to perform statistical tests (Mann-Whitney U, Kruskal-Wallis) and generate visualizations for the Research Questions (Q1, Q2, Q3).
 
 ---
 
-## 5. Outputs & Data Format
+## 🚧 Roadmap & Future Enhancements
 
-### 5.1 Scraping outputs
+The following improvements are planned to scale the analysis and improve scraper resilience:
 
-* `entrylinks.csv`: collected show entry links for batch scraping
-* `output.csv`: final metadata table (**strictly 200 rows & 8 columns**)
-
-### 5.2 Final CSV schema
-
-* `Title`: show title
-* `First air date`: first air date (preferably computed from aggregated episode dates)
-* `End date`: end / latest air date (preferably computed from aggregated episode dates)
-* `Rating`: rating score (convertible to numeric)
-* `Genres`: genre list (later parsed into dummy variables)
-* `Status`: show status (e.g., Running / Ended)
-* `Network`: network/platform (includes web channels where applicable)
-* `Summary`: plain-text summary
-
-> Figures are displayed inside the notebook by default (not necessarily saved to disk).
+* **Concurrent Requests:** Implement `asyncio` or threading to speed up the scraping process for larger datasets (n > 1000).
+* **Streaming Platform Integration:** Incorporate metadata from Netflix/Hulu to compare network TV vs. streaming originals.
+* **Sentiment Analysis:** Apply NLP techniques to the "Summary" field to correlate plot keywords with high ratings.
 
 ---
 
-## 6. FAQ
+## 🤝 Contributing
 
-### Q1: Scraping fails / timeouts happen frequently — what should I do?
+Contributions are welcome. Please follow the standard fork-and-pull request workflow:
 
-* The notebook already includes delays and retries. You can increase:
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b feature/NewAnalysis`).
+3. Commit your Changes (`git commit -m 'Add NLP sentiment analysis'`).
+4. Push to the Branch (`git push origin feature/NewAnalysis`).
+5. Open a Pull Request.
 
-  * `REQUEST_DELAY` (sleep range)
-  * `TIMEOUT` (request timeout)
-  * `MAX_RETRY` (number of retries)
-* Avoid repeatedly rerunning Task 1; generate the CSV once, then focus on analysis.
+---
 
-### Q2: Why must the output be exactly 200 rows and exactly 8 columns?
+## 📝 License
 
-The export step includes strict assertions to ensure the dataset matches the expected rubric / grading input format:
-
-* **Row count = 200**
-* **Column names and order exactly match the required schema**
-
-### Q3: What if I don't install `scikit-posthocs`?
-
-The notebook attempts a fallback approach for pairwise comparisons and multiple-testing correction.
-However, installing `scikit-posthocs` is recommended for cleaner and more standard Dunn post-hoc testing.
+Distributed under the MIT License. See `LICENSE` for more information.
