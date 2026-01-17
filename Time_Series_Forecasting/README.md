@@ -43,7 +43,7 @@ The solution moves beyond traditional statistical baselines (ARIMA/SARIMA), impl
 * **Comprehensive Metrics:** Evaluation based on industry-standard metrics:
 * **RMSE** (Root Mean Square Error)
 * **MAE** (Mean Absolute Error)
-* **** (Coefficient of Determination)
+* **$R^2$** (Coefficient of Determination)
 * **MAPE** (Mean Absolute Percentage Error)
 
 
