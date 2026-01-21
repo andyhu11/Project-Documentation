@@ -19,10 +19,11 @@ Moving beyond simple Multi-Layer Perceptrons (MLPs), this solution leverages spa
 
 ### 🧠 Deep Learning Architecture
 * **Custom CNN Backbone:**
-    * Features a modular design with **3 Convolutional Blocks** (Conv2d -> BatchNorm -> ReLU -> MaxPool).
+    * Features a modular design with **3 Convolutional Blocks**.
+    * Structure per block: **[Conv2d -> BatchNorm -> ReLU] x 2 -> MaxPool**.
     * Utilizes **3x3 Kernels** with padding to preserve spatial dimensions during feature extraction.
 * **Regularization & Stability:**
-    * Implements **Dropout (p=0.25)** to randomly zero out neurons, effectively mitigating overfitting.
+    * Implements **Dropout (p=0.5)** to randomly zero out neurons, effectively mitigating overfitting.
     * **Batch Normalization** layers are integrated to accelerate convergence and stabilize the learning process.
 * **Adaptive Pooling:**
     * Leverages `AdaptiveAvgPool2d` to handle variable input sizes seamlessly before the fully connected classification head.
@@ -30,7 +31,7 @@ Moving beyond simple Multi-Layer Perceptrons (MLPs), this solution leverages spa
 ### 🔄 Data Engineering Pipeline
 * **Automated ETL:** Automatically handles the extraction, transformation, and loading (ETL) of the **CIFAR-10** dataset upon execution.
 * **Robust Augmentation:**
-    * **Random Horizontal Flip** & **Random Rotation** ($10^\circ$) to improve model generalization on unseen data.
+    * **Random Horizontal Flip** & **Random Crop** (32, padding=4) to improve model generalization on unseen data.
     * Standardization using channel-wise Mean and Std deviation.
 * **Efficient Loading:** Optimized `DataLoader` with `SubsetRandomSampler` for reproducible Train/Validation splits (20% validation).
 
@@ -56,13 +57,14 @@ The table below breaks down the model's performance across individual categories
 | Class Category | Accuracy | Performance Tier |
 | :--- | :--- | :--- |
 | **Automobile** | **95.80%** | 🟢 High Confidence |
-| **Frog** | **93.80%** | 🟢 High Confidence |
-| **Truck** | **93.70%** | 🟢 High Confidence |
 | **Ship** | **89.70%** | 🟢 High Confidence |
-| **Airplane** | **89.20%** | 🟢 High Confidence |
-| **Horse** | **86.40%** | 🟢 High Confidence |
-| *Bird* | *76.80%* | 🟡 Moderate |
-| *Cat* | *69.90%* | 🔴 Hardest Class |
+| **Truck** | **89.60%** | 🟢 High Confidence |
+| **Frog** | **89.20%** | 🟢 High Confidence |
+| **Horse** | **84.90%** | 🟢 High Confidence |
+| **Dog** | **84.00%** | 🟢 High Confidence |
+| **Airplane** | **82.60%** | 🟡 Moderate |
+| *Bird* | *77.30%* | 🟡 Moderate |
+| *Cat* | *64.00%* | 🔴 Hardest Class |
 
 > **Insight:** The model performs exceptionally well on rigid objects (Cars, Trucks) but faces slight challenges with deformable objects (Cats, Birds), suggesting potential for improvement via deeper architectures like ResNet.
 
@@ -74,6 +76,7 @@ The table below breaks down the model's performance across individual categories
 Image_Classification_CNN/
 ├── Image_Classification_CNN.ipynb  # Main Jupyter Notebook source code
 └── README.md                       # Project Documentation
+
 
 ```
 
@@ -98,38 +101,36 @@ Image_Classification_CNN/
 ### Installation
 
 1. **Clone the repository:**
+
 ```bash
 git clone [https://github.com/your-username/Image_Classification_CNN.git](https://github.com/your-username/Image_Classification_CNN.git)
 cd Image_Classification_CNN
 
 ```
 
-
 2. **Install dependencies:**
+
 ```bash
 pip install torch torchvision numpy matplotlib jupyter
 
 ```
 
-
-
 ### Usage Guide
 
 1. **Launch Jupyter Notebook:**
+
 ```bash
 jupyter notebook Image_Classification_CNN.ipynb
 
 ```
 
-
 2. **Execute the Pipeline:**
 Run all cells sequentially. The notebook is self-contained and will:
+
 * **Download** the CIFAR-10 dataset.
 * **Train** the CNN for 30 epochs (approx. 20-30 mins on GPU).
 * **Save** the best model weights.
 * **Visualize** accuracy statistics and predictions.
-
-
 
 ---
 
@@ -156,4 +157,3 @@ Contributions are welcome! If you have ideas for improving the accuracy on "Cat"
 ## 📝 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
