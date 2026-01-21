@@ -130,7 +130,7 @@ python Models/LSTM_consumption_model.py
 
 ```
 
-> **Note:** Detailed mathematical theory, feature importance heatmaps, and residual analysis can be found in the **[Project Report PDF](./Time_Series_Forecasting/Time%20Series%20Forecasting%20of%20Energy%20Behavior%20in%20Solar%20Panel%20Prosumers.pdf)**.
+> **Note:** Detailed mathematical theory, feature importance heatmaps, and residual analysis can be found in the **[Project Report PDF](./Time%20Series%20Forecasting%20of%20Energy%20Behavior%20in%20Solar%20Panel%20Prosumers.pdf)**.
 
 ---
 
