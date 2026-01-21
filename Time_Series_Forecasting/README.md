@@ -45,8 +45,8 @@ Based on the empirical analysis of the **Enefit** dataset, the tuned XGBoost mod
 ### Model Comparison (Baseline vs. XGBoost)
 
 <p float="left">
-  <img src="images/image_04868a.jpg" width="49%" alt="Consumption Model Comparison" />
-  <img src="images/image_048685.jpg" width="49%" alt="Production Model Comparison" />
+  <img src="../images/image_04868a.jpg" width="49%" alt="Consumption Model Comparison" />
+  <img src="../images/image_048685.jpg" width="49%" alt="Production Model Comparison" />
 </p>
 
 > **Figure 1:** Comparison of XGBoost against ARIMAX and SARIMAX baselines. Note the drastic reduction in MAPE (Mean Absolute Percentage Error) for the XGBoost model (Blue bar).
