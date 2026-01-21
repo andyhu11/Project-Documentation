@@ -20,7 +20,7 @@ The solution moves beyond traditional statistical baselines (ARIMA/SARIMA), impl
 ### 🧠 Advanced Modeling Architectures
 * **eXtreme Gradient Boosting (XGBoost):**
     * High-performance ensemble models optimized for tabular time-series data.
-    * Achieved superior performance through automated hyperparameter tuning (Grid Search & Random Search).
+    * Achieved superior performance through automated hyperparameter tuning (**Bayesian Optimization via Optuna**).
 * **Long Short-Term Memory (LSTM):**
     * Custom-built Recurrent Neural Networks (RNN) designed to capture temporal dependencies.
     * Implemented with callbacks for Early Stopping and Learning Rate Reduction.
@@ -115,6 +115,11 @@ pip install pandas numpy tensorflow xgboost scikit-learn optuna openpyxl
 
 
 ### Usage Guide
+
+**⚠️ Configuration Required:**
+Before running the models, you **must** update the data file paths in the Python scripts to match your local directory structure:
+* **LSTM Models:** Open `Models/LSTM_consumption_model.py` and `Models/LSTM_production_model.py`, then update the `data_path` variable to point to your local CSV file.
+* **XGBoost Models:** Ensure the data files are located in the directory specified by `pd.read_csv(...)` inside the scripts.
 
 To run the optimized XGBoost production model:
 
