@@ -90,3 +90,9 @@ cd Project-Documentation
 ## 📄 License
 
 This repository is licensed under the **MIT License**. See individual project folders for specific third-party attributions.
+
+---
+## 📫 Connect with Me
+* **LinkedIn:** [Andy](https://linkedin.com/in/andy-hu-b00573349)
+* **Portfolio:** github.com/andyhu11/Project-Documentation
+* **Email:** jiahuiapply26@163.com
