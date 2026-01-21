@@ -1,45 +1,66 @@
 # Web Scraping & Data Analysis
 
-> **A comprehensive data pipeline and analytical framework for investigating TV show trends, longevity, and audience reception.**
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Library](https://img.shields.io/badge/Library-Pandas%20%7C%20SciPy%20%7C%20Requests-orange)
+![Visualization](https://img.shields.io/badge/Visualization-Seaborn%20%7C%20Matplotlib-yellow)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
+> **A reproducible research pipeline designed to harvest entertainment metadata and perform statistical inference on TV show lifecycles and audience reception.**
 
 ## 📖 Overview
 
-**Web Scraping & Data Analysis** is a Python-based research project designed to harvest, clean, and analyze entertainment media data. Leveraging the **TVmaze API**, this tool automates the collection of dataset specifications including air dates, ratings, and network metadata.
+**Web Scraping & Data Analysis** is a dual-phase engineering and analytics project. It establishes an automated data acquisition framework to interface with the **TVmaze API**, constructing a granular dataset of television specifications, including air dates, weighted ratings, and network metadata.
 
-The project moves beyond simple data collection to perform rigorous statistical analysis, testing hypotheses regarding "Golden Age" television windows, the correlation between show longevity and ratings, and the performance gap between concluded and ongoing series.
+Moving beyond simple extraction, the project applies rigorous statistical methodologies (Kruskal-Wallis, Mann-Whitney U) to validate hypotheses regarding media consumption. It investigates the existence of "Golden Age" windows, quantifies the "legacy bias" in completed series, and models the non-linear relationship between show longevity and critical acclaim.
 
 ---
 
 ## ✨ Key Features
 
-### 🛠 Data Engineering
+### 🛠 Data Engineering Pipeline
 
-* **Automated Scraper:** A robust collection engine that interfaces with TVmaze to fetch canonical show data.
-* **Data Serialization:** Automatically structures and exports raw data into machine-readable formats (`.csv`) for downstream analysis.
-* **Attribute Extraction:** Captures critical metadata including:
-* **Lifecycle:** First Air Date, End Date, Status (Running/Ended).
-* **Reception:** Weighted Ratings.
-* **Classification:** Genres, Network, and Summaries.
+* **Automated Extraction Engine:**
+* Implements a resilient scraper to fetch canonical show data from TVmaze seed pages.
+* Handles HTTP request logic and data parsing to ensure dataset integrity.
 
 
-
-### 📊 Analytical Insights
-
-* **Temporal Analysis (The "Golden Window"):**
-* Evaluates premiere years to identify eras of peak critical reception.
-* *Finding:* Statistical evidence (H=36.92) suggests the **1990s** hold a significant regression advantage over the 2010s, challenging the "modern golden age" hypothesis.
+* **Serialization & Structuring:**
+* Normalizes semi-structured JSON responses into tabular formats.
+* Exports processed datasets to CSV (`Jiahui.Hu+2252518.csv`) for persistent storage and interoperability.
 
 
-* **Status Comparative Study:**
-* Compares audience reception between **Ended** and **Running** shows.
-* *Finding:* Ended shows demonstrate a statistically significant higher median rating (7.90) compared to running shows (7.50).
+* **Feature Extraction:**
+* **Temporal Dimensions:** Premiere Year, End Date, Duration.
+* **Categorical Metadata:** Genres, Network, Status (Running/Ended).
+* **Qualitative Metrics:** Weighted Audience Ratings, Summary Text.
 
 
-* **Longevity vs. Quality:**
-* Investigates the "Longer is Better" hypothesis using linear duration terms.
-* *Finding:* The analysis reveals a non-linear "Early Rise — Mid Plateau — Late Decline" pattern, debunking the myth that longevity guarantees higher ratings.
 
+### 📊 Statistical Inference & Analysis
 
+* **Hypothesis Testing:** Utilization of non-parametric tests (Mann-Whitney U, Kruskal-Wallis) to handle non-normal distribution in rating data.
+* **Trend Modeling:** Regression analysis to identify "Golden Window" eras.
+* **Survival Bias Investigation:** Analytical breakdown of "Ended" vs. "Running" shows to isolate reception anomalies.
+
+---
+
+## 📈 Research Findings
+
+Based on the empirical analysis of the harvested TVmaze dataset, this study challenged several common industry assumptions.
+
+### Statistical Summary
+
+| Research Question | Metric / Test | Outcome | Key Insight |
+| --- | --- | --- | --- |
+| **Q1: The "Golden Window"** | Kruskal-Wallis Test | **H=36.92, p<0.001** | Significant regression advantage for **1990s** shows over the 2010s. |
+| **Q2: Status Comparison** | Mann-Whitney U | **p=0.0037** | **Ended** shows (Median 7.90) statistically outperform **Running** shows (Median 7.50). |
+| **Q3: Longevity Impact** | Linear Regression | **Non-Significant** | "Longer is Better" is rejected. Data follows a **non-linear** "Early Rise — Mid Plateau — Late Decline" curve. |
+
+<div align="center">
+  <img src="images/rating_distribution.png" width="80%" alt="Ratings by Decade">
+</div>
+
+**Figure 1 (Derived):** The analysis indicates that high ratings are not concentrated in long-running modern shows, but rather in completed series from specific historical decades, suggesting a strong "Survivor Bias" in retrospective ratings.
 
 ---
 
@@ -58,28 +79,29 @@ Web_Scraping_Data_Analysis/
 
 ### Prerequisites
 
-* **Python 3.x**
-* **Jupyter Notebook** or **JupyterLab**
-* **Required Libraries:**
-* `pandas` (Data manipulation)
-* `requests` (HTTP requests)
+* **Python 3.8+**
+* **Jupyter Lab** or **Notebook**
+* **Core Libraries:**
+* `pandas` (Dataframe manipulation)
+* `requests` (API interfacing)
 * `scipy` (Statistical testing)
-* `matplotlib` / `seaborn` (Visualization)
+* `matplotlib` / `seaborn` (Data visualization)
 
 
 
 ### Installation
 
-1. Clone this repository:
+1. **Clone the repository:**
 ```bash
-git clone https://github.com/your-username/Project-Documentation.git
+git clone https://github.com/your-username/Web-Scraping-Data-Analysis.git
+cd Web-Scraping-Data-Analysis
 
 ```
 
 
-2. Navigate to the project directory:
+2. **Install dependencies:**
 ```bash
-cd Project-Documentation/Web_Scraping_Data_Analysis
+pip install pandas requests scipy matplotlib seaborn
 
 ```
 
@@ -87,37 +109,28 @@ cd Project-Documentation/Web_Scraping_Data_Analysis
 
 ### Usage Guide
 
-1. **Launch the Notebook:**
-Open `Web Scraping & Data Analysis.ipynb` in your Jupyter environment.
-2. **Execute Task 1 (Scraping):**
-Run the initial cells to fetch fresh data from TVmaze.
-> *Note: This process will generate a local output file named `Jiahui.Hu+2252518.csv` containing the raw dataset.*
+1. **Launch the Environment:**
+```bash
+jupyter notebook "Web Scraping & Data Analysis.ipynb"
+
+```
 
 
-3. **Execute Task 2 (Analysis):**
-Run the subsequent cells to perform statistical tests (Mann-Whitney U, Kruskal-Wallis) and generate visualizations for the Research Questions (Q1, Q2, Q3).
+2. **Execute Phase 1 (Data Collection):**
+Run the initial cells to trigger the scraper.
+> *Output:* This will generate the `Jiahui.Hu+2252518.csv` raw dataset locally.
 
----
 
-## 🚧 Roadmap & Future Enhancements
-
-The following improvements are planned to scale the analysis and improve scraper resilience:
-
-* **Concurrent Requests:** Implement `asyncio` or threading to speed up the scraping process for larger datasets (n > 1000).
-* **Streaming Platform Integration:** Incorporate metadata from Netflix/Hulu to compare network TV vs. streaming originals.
-* **Sentiment Analysis:** Apply NLP techniques to the "Summary" field to correlate plot keywords with high ratings.
+3. **Execute Phase 2 (Analytical Validation):**
+Run the subsequent cells to reproduce the Q1, Q2, and Q3 statistical tests and generate visualization plots.
 
 ---
 
-## 🤝 Contributing
+## 🚧 Future Roadmap
 
-Contributions are welcome. Please follow the standard fork-and-pull request workflow:
-
-1. Fork the Project.
-2. Create your Feature Branch (`git checkout -b feature/NewAnalysis`).
-3. Commit your Changes (`git commit -m 'Add NLP sentiment analysis'`).
-4. Push to the Branch (`git push origin feature/NewAnalysis`).
-5. Open a Pull Request.
+* **Asynchronous Scraping:** Implement `aiohttp` and `asyncio` to reduce data collection latency for datasets .
+* **Cross-Platform Integration:** Expand schema to ingest metadata from Streaming VOD platforms (Netflix, Hulu) for comparative analysis against Network TV.
+* **NLP Sentiment Scoring:** Apply `NLTK` or `TextBlob` to the "Summary" field to correlate plot keywords and sentiment polarity with audience ratings.
 
 ---
 
