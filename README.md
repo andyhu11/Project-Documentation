@@ -33,7 +33,7 @@ This repository serves as a centralized portfolio containing six production-grad
 
 ## 🛠 Technical Deep Dives
 
-### 1. Solar Prosumer Energy Forecasting
+### 1. ☀️ Solar Prosumer Energy Forecasting
 * **Challenge:** Mitigate energy imbalance costs in smart grids by predicting erratic prosumer behavior.
 * **Solution:** Developed a comparative pipeline using **Gradient Boosting (XGBoost)** and **Recurrent Neural Networks (LSTM)**.
 * **Highlights:**
@@ -42,7 +42,7 @@ This repository serves as a centralized portfolio containing six production-grad
     * **Artifacts:** Full technical report (`.pdf`) and production-ready Python scripts.
 * 👉 **[View Project](./Time_Series_Forecasting)**
 
-### 2. Loan Approval AI & Fairness
+### 2. 🏦 Loan Approval AI & Fairness
 * **Challenge:** Automate loan eligibility while minimizing financial risk and maintaining interpretability.
 * **Solution:** A **Random Forest** classifier tuned for high precision in the "Safe-to-Approve" band.
 * **Highlights:**
@@ -51,7 +51,7 @@ This repository serves as a centralized portfolio containing six production-grad
     * **Performance:** Achieved ROC-AUC of **0.999** on the test set.
 * 👉 **[View Project](./Loan_Approval_Prediction)**
 
-### 3. Quantitative Risk Engine (R)
+### 3. 📊 Quantitative Risk Engine (R)
 * **Challenge:** Model portfolio risk beyond simple standard deviation in volatile markets.
 * **Solution:** A statistical framework combining **Modern Portfolio Theory (MPT)** with time-series econometrics.
 * **Highlights:**
@@ -60,7 +60,7 @@ This repository serves as a centralized portfolio containing six production-grad
     * **Backtesting:** Rolling-window analysis to validate Value-at-Risk (VaR) estimations.
 * 👉 **[View Project](./Portfolio_Risk_Modeling)**
 
-### 4. CNN Image Classification (Computer Vision)
+### 4. 🖼️ CNN Image Classification (Computer Vision)
 * **Challenge:** Implement a robust vision pipeline from scratch without relying on pre-trained models.
 * **Solution:** Designed a custom **3-layer Convolutional Neural Network (CNN)** for the CIFAR-10 dataset.
 * **Highlights:**
@@ -69,7 +69,7 @@ This repository serves as a centralized portfolio containing six production-grad
     * **Result:** Achieved **84.6% Accuracy**, with strong performance on mechanical classes (Cars/Trucks).
 * 👉 **[View Project](./Image_Classification_CNN)**
 
-### 5. Web Scraping & Statistical Analysis
+### 5. 🕸️ Web Scraping & Statistical Analysis
 * **Challenge:** Validate cultural theories ("Golden Age of TV") using real-world unstructured data.
 * **Solution:** A dual-phase pipeline: **Automated Scraper** (Python/Requests) + **Statistical Inference** (SciPy).
 * **Highlights:**
@@ -78,7 +78,7 @@ This repository serves as a centralized portfolio containing six production-grad
     * **Insight:** Disproved "Longer is Better" myths using robust regression analysis.
 * 👉 **[View Project](./Web_Scraping_Data_Analysis)**
 
-### 6. UniBooks Management System (DBMS)
+### 6. 📚 UniBooks Management System (DBMS)
 * **Challenge:** Replace manual bookstore tracking with a scalable, atomic transaction system.
 * **Solution:** A relational database system built with **MS Access** and **VBA** automation.
 * **Highlights:**
