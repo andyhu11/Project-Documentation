@@ -9,7 +9,7 @@
 
 ## 📖 Overview
 
-**Web Scraping & Data Analysis** is a dual-phase engineering and analytics project. It establishes an automated data acquisition framework to interface with the **TVmaze API**, constructing a granular dataset of television specifications, including air dates, weighted ratings, and network metadata.
+**Web Scraping & Data Analysis** is a dual-phase engineering and analytics project. It establishes an automated data acquisition framework to **scrape data from TVmaze**, constructing a granular dataset of television specifications, including air dates, weighted ratings, and network metadata.
 
 Moving beyond simple extraction, the project applies rigorous statistical methodologies (Kruskal-Wallis, Mann-Whitney U) to validate hypotheses regarding media consumption. It investigates the existence of "Golden Age" windows, quantifies the "legacy bias" in completed series, and models the non-linear relationship between show longevity and critical acclaim.
 
@@ -20,8 +20,9 @@ Moving beyond simple extraction, the project applies rigorous statistical method
 ### 🛠 Data Engineering Pipeline
 
 * **Automated Extraction Engine:**
-* Implements a resilient scraper to fetch canonical show data from TVmaze seed pages.
-* Handles HTTP request logic and data parsing to ensure dataset integrity.
+    * Implements a resilient **web scraper** utilizing a **seed-based crawling strategy** to discover and fetch canonical show data.
+    * Uses **BeautifulSoup** to parse HTML content and extract unstructured metadata from detail pages.
+    * Handles HTTP request logic with **polite throttling** and **retry mechanisms** to ensure dataset integrity.
 
 
 * **Serialization & Structuring:**
@@ -82,10 +83,11 @@ Web_Scraping_Data_Analysis/
 * **Python 3.8+**
 * **Jupyter Lab** or **Notebook**
 * **Core Libraries:**
-* `pandas` (Dataframe manipulation)
-* `requests` (API interfacing)
-* `scipy` (Statistical testing)
-* `matplotlib` / `seaborn` (Data visualization)
+    * `pandas` (Dataframe manipulation)
+    * `requests` (HTTP requests)
+    * `beautifulsoup4` (HTML Parsing)
+    * `scipy` (Statistical testing)
+    * `matplotlib` / `seaborn` (Data visualization)
 
 
 
@@ -101,7 +103,7 @@ cd Web-Scraping-Data-Analysis
 
 2. **Install dependencies:**
 ```bash
-pip install pandas requests scipy matplotlib seaborn
+pip install pandas requests scipy matplotlib seaborn beautifulsoup4
 
 ```
 
