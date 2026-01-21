@@ -1,5 +1,10 @@
 # Solar Prosumer Energy Forecasting
 
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Library](https://img.shields.io/badge/Library-TensorFlow%20%7C%20XGBoost-orange)
+![Optimization](https://img.shields.io/badge/Tuning-Optuna-green)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
 > **A machine learning pipeline utilizing LSTM and XGBoost to predict electricity consumption and production behaviors of solar panel prosumers.**
 
 ## 📖 Overview
@@ -13,60 +18,54 @@ The solution moves beyond traditional statistical baselines (ARIMA/SARIMA), impl
 ## ✨ Key Features
 
 ### 🧠 Advanced Modeling Architectures
-
-* **Long Short-Term Memory (LSTM):**
-* Custom-built Recurrent Neural Networks (RNN) designed to capture long-term temporal dependencies in energy usage.
-* Implemented using **TensorFlow/Keras** with callbacks for Early Stopping and Learning Rate Reduction.
-
-
 * **eXtreme Gradient Boosting (XGBoost):**
-* High-performance ensemble models optimized for tabular time-series data.
-* Features automated hyperparameter tuning to maximize  scores.
-
-
+    * High-performance ensemble models optimized for tabular time-series data.
+    * Achieved superior performance through automated hyperparameter tuning (Grid Search & Random Search).
+* **Long Short-Term Memory (LSTM):**
+    * Custom-built Recurrent Neural Networks (RNN) designed to capture temporal dependencies.
+    * Implemented with callbacks for Early Stopping and Learning Rate Reduction.
 
 ### 🛠 Data Engineering Pipeline
+* **Robust Preprocessing:** Linear interpolation for core variables and median imputation for auxiliary features to handle missing data.
+* **Noise Reduction:** Applied "Time-windowed mean smoothing" to meteorological data to reduce short-term volatility.
+* **Feature Construction:**
+    * **Lag Features:** `lag_prod_1h` / `lag_cons_1h` to capture historical effects.
+    * **Cyclical Encoding:** `sin_hour`, `cos_doy` to preserve daily and seasonal periodicities.
 
-* **Robust Preprocessing:**
-* Data cleaning and imputation strategies for handling missing weather and meter data.
-* **Feature Scaling:** Standardization of input variables (seen in `final_data_for_consumption_scaled.csv`) to ensure model stability.
-
-
-* **Temporal Feature Extraction:**
-* Cyclical encoding of time features (e.g., `sin_hour`, `cos_doy`) to preserve the periodic nature of daily and seasonal energy cycles.
-
-
-
-### 📊 Model Optimization & Evaluation
-
-* **Hyperparameter Tuning:** Integration with **Optuna** for automated search of optimal model parameters (learning rates, estimators, depth).
-* **Comprehensive Metrics:** Evaluation based on industry-standard metrics: **RMSE**, **MAE**, ****, and **MAPE**.
+### 📊 Model Optimization
+* **Hyperparameter Tuning:** Integration with **Optuna** for Bayesian optimization of model parameters (e.g., learning rates, tree depth, dropout rates).
+* **Comprehensive Metrics:** Evaluation based on **RMSE**, **MAE**, **$R^2$**, and **MAPE**.
 
 ---
 
 ## 📈 Performance
 
-Based on the empirical analysis of the **Enefit** dataset, the tuned XGBoost model demonstrated superior predictive capabilities compared to both deep learning and statistical baselines.
+Based on the empirical analysis of the **Enefit** dataset, the tuned XGBoost model demonstrated superior predictive capabilities. As shown below, the Machine Learning approach (XGBoost) significantly reduced error rates compared to traditional statistical baselines (ARIMA/SARIMA).
 
-### 1. Evaluation Results (Mean Metrics)
+### Model Comparison (Baseline vs. XGBoost)
 
-| Model Category | Task |  Score | RMSE | MAE |
-| --- | --- | --- | --- | --- |
+<p float="left">
+  <img src="images/image_04868a.jpg" width="49%" alt="Consumption Model Comparison" />
+  <img src="images/image_048685.jpg" width="49%" alt="Production Model Comparison" />
+</p>
+
+> **Figure 1:** Comparison of XGBoost against ARIMAX and SARIMAX baselines. Note the drastic reduction in MAPE (Mean Absolute Percentage Error) for the XGBoost model (Blue bar).
+
+### Evaluation Results (Test Set)
+
+| Model Category | Task | $R^2$ Score | RMSE | MAE |
+| :--- | :--- | :--- | :--- | :--- |
 | **SARIMAX (Baseline)** | Consumption | 0.7994 | 0.5302 | 0.4846 |
-|  | Production | 0.8358 | 0.2815 | 0.1541 |
-| **XGBoost (Tuned)** | Consumption | **0.9567** | **0.0534** | **0.0346** |
-|  | Production | **0.9686** | **0.0422** | **0.0137** |
+| | Production | 0.8358 | 0.2815 | 0.1541 |
 | **LSTM (Tuned)** | Consumption | 0.8938 | 0.0654 | 0.0437 |
-|  | Production | 0.9552 | 0.0559 | 0.0276 |
+| | Production | 0.9552 | 0.0559 | 0.0276 |
+| **XGBoost (Tuned)** | **Consumption** | **0.9567** | **0.0534** | **0.0346** |
+| | **Production** | **0.9686** | **0.0422** | **0.0137** |
 
-### 2. Key Technical Insights
-
-* **Optimization Gain:** Hyperparameter tuning via Optuna improved the XGBoost consumption  from 0.9457 to **0.9567**.
-* **Driver Analysis:** * **Production:** Highly sensitive to surface solar radiation, with cloud cover showing a secondary effect.
-* **Consumption:** Heavily influenced by historical lag features (1-hour prior usage), whereas real-time electricity prices had a lower immediate correlation.
-
-
-* **Architecture Comparison:** While LSTM successfully captured long-term dependencies, XGBoost proved more robust for the structured, high-dimensional tabular time-series features in this specific dataset.
+### Key Insights
+* **Production Drivers:** Highly sensitive to **surface solar radiation** and **direct solar radiation**.
+* **Consumption Drivers:** Heavily influenced by **historical lag features** (1-hour prior usage), reflecting strong behavioral inertia.
+* **Model Fusion Findings:** Initial experiments with model fusion (Weighted Average, Deep Learning Stacking) were conducted. However, the standalone **XGBoost** model proved more robust and computationally efficient for this specific tabular dataset.
 
 ---
 
@@ -75,15 +74,15 @@ Based on the empirical analysis of the **Enefit** dataset, the tuned XGBoost mod
 ```text
 Time_Series_Forecasting/
 ├── Data/
-│   ├── final_data_for_consumption_scaled.csv   # Pre-processed/Scaled consumption data
-│   └── final_data_for_production_scaled.csv    # Pre-processed/Scaled production data
+│   ├── final_data_for_consumption_scaled.csv    # Pre-processed/Scaled consumption data
+│   └── final_data_for_production_scaled.csv     # Pre-processed/Scaled production data
 ├── Models/
-│   ├── LSTM_consumption_model.py               # Deep Learning training script (Consumption)
-│   ├── LSTM_production_model.py                # Deep Learning training script (Production)
-│   ├── xgboost_consumption_model.py            # Gradient Boosting script (Consumption)
-│   └── xgboost_production_model.py             # Gradient Boosting script (Production)
-├── Time Series Forecasting of Energy Behavior in Solar Panel Prosumers.pdf # Full Project Report
-└── README.md                                   # Project Documentation
+│   ├── LSTM_consumption_model.py                # Deep Learning training script (Consumption)
+│   ├── LSTM_production_model.py                 # Deep Learning training script (Production)
+│   ├── xgboost_consumption_model.py             # Gradient Boosting script (Consumption)
+│   └── xgboost_production_model.py              # Gradient Boosting script (Production)
+├── Time Series Forecasting of Energy Behavior.pdf # Full Project Report
+└── README.md                                    # Project Documentation
 
 ```
 
@@ -93,73 +92,61 @@ Time_Series_Forecasting/
 
 ### Prerequisites
 
-* **Python 3.8+**
-* **TensorFlow** (2.x)
-* **XGBoost**
-* **Optuna** (for optimization)
-* **Pandas / NumPy / Scikit-Learn**
+* Python 3.8+
+* TensorFlow (2.x)
+* XGBoost
+* Optuna
 
 ### Installation
 
-1. Clone the repository:
-
+1. **Clone the repository:**
 ```bash
-git clone https://github.com/your-username/Project-Documentation.git
+git clone [https://github.com/your-username/Solar-Prosumer-Forecasting.git](https://github.com/your-username/Solar-Prosumer-Forecasting.git)
+cd Solar-Prosumer-Forecasting
 
 ```
 
-2. Navigate to the project directory:
 
+2. **Install dependencies:**
 ```bash
-cd Project-Documentation/Time_Series_Forecasting
+pip install pandas numpy tensorflow xgboost scikit-learn optuna openpyxl
 
 ```
 
-3. Install dependencies:
 
-```bash
-pip install pandas numpy tensorflow xgboost scikit-learn optuna
-
-```
 
 ### Usage Guide
 
-1. **Data Preparation:** Ensure dataset files are in `Data/`.
-2. **Training Models:**
+To run the optimized XGBoost production model:
 
 ```bash
-cd Models
-# Run LSTM Training
-python LSTM_consumption_model.py
-# Run XGBoost Optimization
-python xgboost_production_model.py
+python Models/xgboost_production_model.py
 
 ```
 
-> **Note:** For a deep dive into the mathematical theory, feature importance analysis, and result interpretation, please refer to the **[Project Report PDF](https://github.com/andyhu11/Project-Documentation/blob/main/Time_Series_Forecasting/Time%20Series%20Forecasting%20of%20Energy%20Behavior%20in%20Solar%20Panel%20Prosumers.pdf)**.
+To retrain the LSTM consumption model:
+
+```bash
+python Models/LSTM_consumption_model.py
+
+```
+
+> **Note:** Detailed mathematical theory, feature importance heatmaps, and residual analysis can be found in the **[Project Report PDF](https://www.google.com/search?q=./Time%2520Series%2520Forecasting%2520of%2520Energy%2520Behavior%2520in%2520Solar%2520Panel%2520Prosumers.pdf)**.
 
 ---
 
-## 🚧 Roadmap & Future Enhancements
+## 🚧 Future Roadmap
 
-* **Model Fusion Strategy:** Implement a weighted ensemble of LSTM and XGBoost to further reduce variance.
-* **Real-Time Inference API:** Wrap models in **FastAPI** for real-time grid operator support.
-* **Transformer Architecture:** Experiment with **Temporal Fusion Transformers (TFT)** for better handling of static metadata.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome:
-
-1. Fork the Project.
-2. Create your Feature Branch (`git checkout -b feature/NewArchitecture`).
-3. Commit Changes (`git commit -m 'Add Transformer Model'`).
-4. Push to the Branch.
-5. Open a Pull Request.
+* **Refine Model Fusion:** Re-evaluate ensemble strategies (Stacking/Blending) using meta-learners to potentially surpass single-model performance.
+* **Transformer Architecture:** Experiment with **Temporal Fusion Transformers (TFT)** to better handle static metadata and long-term dependencies.
+* **Real-Time Inference:** Wrap models in **FastAPI** for real-time grid operator support.
 
 ---
 
 ## 📝 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+```
+
+```
