@@ -50,9 +50,6 @@ Based on the evaluation of the **CIFAR-10** test set (10,000 images), the model 
 > **Note:** The model achieved its best validation loss of **0.4442** during the training phase, indicating minimal overfitting. Detailed visualization charts (Loss curves, Misclassified examples) are rendered directly within the Jupyter Notebook output cells.
 
 ### Class-wise Evaluation Metrics
-| Training Loss Curve | Prediction Samples |
-| :---: | :---: |
-| <img src="images/training_curve.png" width="100%" alt="Training Loss Curve"> | <img src="images/prediction_sample.png" width="100%" alt="Model Predictions"> |
 
 The table below breaks down the model's performance across individual categories, highlighting its strength in identifying mechanical objects vs. biological subjects.
 
@@ -160,6 +157,3 @@ Contributions are welcome! If you have ideas for improving the accuracy on "Cat"
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-```
-
-```
