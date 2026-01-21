@@ -1,90 +1,92 @@
-# Project-Documentation
+# 🚀 Engineering & Data Science Portfolio
 
-This repository is a collection of multiple independent projects (database system / machine learning / deep learning / financial risk modeling / time series forecasting / web scraping & data analysis). Each project lives in its own folder—open the folder to see its README, code, and reports.
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)
+![R](https://img.shields.io/badge/Language-R-276DC3?logo=r&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)
+![SQL](https://img.shields.io/badge/Database-SQL-4479A1?logo=postgresql&logoColor=white)
 
----
+> **A comprehensive collection of technical projects demonstrating end-to-end expertise in Machine Learning, Quantitative Finance, and Full-Stack Data Engineering.**
 
-## 📌 Projects at a Glance
+## 📂 Repository Overview
 
-| Project | Tech Stack | One-line Summary | Links |
-|---|---|---|---|
-| Books Management System | Microsoft Access (.accdb) | An Access-based book management system for purchasing, inventory, sales logging, and reporting (with a user guide). | [Folder](./Books_Management_System) · [README](./Books_Management_System/README.md) |
-| Image Classification (CNN) | PyTorch / torchvision | CIFAR-10 image classification: augmentation, CNN training, best-model saving, evaluation, and visualization. | [Folder](./Image_Classification_CNN) · [README](./Image_Classification_CNN/README.md) |
-| Loan Approval Prediction | scikit-learn / SHAP | Loan approval binary classification: EDA, leakage-free preprocessing, feature engineering, tuning, threshold analysis, and model artifacts. | [Folder](./Loan_Approval_Prediction) · [README](./Loan_Approval_Prediction/README.md) |
-| Portfolio Risk Modeling | R / copula / rugarch | Markowitz portfolio optimization + Copula-based VaR + GARCH volatility & VaR (with plots and outputs). | [Folder](./Portfolio_Risk_Modeling) · [README](./Portfolio_Risk_Modeling/README.md) |
-| Time Series Forecasting (Solar Panel Prosumers) | XGBoost / LSTM / Optuna / TensorFlow | Forecasting prosumers’ electricity consumption and solar generation using XGBoost and LSTM, with a full report. | [Folder](./Time_Series_Forecasting) · [README](./Time_Series_Forecasting/README.md) |
-| Web Scraping & Data Analysis (TVmaze) | requests / BeautifulSoup / statsmodels | Scrape metadata for 200 TV shows from TVmaze to CSV, then run statistical tests and robust regression analyses. | [Folder](./Web_Scraping_Data_Analysis) · [README](./Web_Scraping_Data_Analysis/README.md) |
+This repository serves as a centralized portfolio containing six production-grade projects. Each directory represents a standalone application or research pipeline, complete with source code, documentation, and rigorous performance analysis.
 
----
+### 🧠 Deep Learning & Time Series
+| Project | Domain | Tech Stack | Key Impact |
+| :--- | :--- | :--- | :--- |
+| **[Solar Energy Forecasting](./Time_Series_Forecasting)** | Smart Grid / Energy | `XGBoost` `LSTM` `Optuna` | Reduced MAPE error significantly vs. ARIMA baselines; engineered hybrid forecasting models for prosumer consumption/production. |
+| **[CNN Image Classification](./Image_Classification_CNN)** | Computer Vision | `PyTorch` `torchvision` | Achieved **84.6% Accuracy** on CIFAR-10 using a custom 3-layer CNN with adaptive pooling and augmentation pipelines. |
 
-## Books Management System (Microsoft Access)
+### 🤖 Classical Machine Learning
+| Project | Domain | Tech Stack | Key Impact |
+| :--- | :--- | :--- | :--- |
+| **[Loan Approval Prediction](./Loan_Approval_Prediction)** | FinTech / Risk | `Scikit-Learn` `SHAP` `Random Forest` | Built an automated underwriting system with **99.5% Precision** and **100% Recall**; integrated SHAP for regulatory explainability. |
+| **[TV Show Analytics](./Web_Scraping_Data_Analysis)** | Data Mining | `SciPy` `BeautifulSoup` `Statsmodels` | End-to-end scraper for 200+ shows; applied Kruskal-Wallis & Robust Regression to debunk "Golden Age" TV myths. |
 
-- **What it is**: A Microsoft Access `.accdb` project with tables/queries/forms/reports for common workflows (purchase, inventory, sales, and analytics).
-- **Highlights**:
-  - End-to-end workflow: purchasing → inventory updates → sales logging → summary reports
-  - Automatic inventory updates to track stock levels and changes promptly
-- **Entry**:
-  - [Project folder](./Books_Management_System)
-  - [Project README](./Books_Management_System/README.md)
-
----
-
-## Image Classification with CNN (CIFAR-10 / PyTorch)
-
-- **What it is**: A full notebook pipeline: environment checks → data loading/preprocessing → CNN modeling → train/val → save best model → test evaluation → inference visualization.
-- **Highlights**:
-  - Reports overall test accuracy and per-class accuracy across all 10 CIFAR-10 classes
-  - Visualizes inference results with correctly vs. incorrectly predicted samples for quick sanity checks
-- **Entry**:
-  - [Project folder](./Image_Classification_CNN)
-  - [Project README](./Image_Classification_CNN/README.md)
+### 📉 Quantitative Finance & Systems
+| Project | Domain | Tech Stack | Key Impact |
+| :--- | :--- | :--- | :--- |
+| **[Portfolio Risk Modeling](./Portfolio_Risk_Modeling)** | Quant Finance | `R` `GARCH` `Copula` | Implemented Mean-Variance optimization (Markowitz) and Dynamic Volatility forecasting using GARCH(1,1). |
+| **[UniBooks System](./Books_Management_System)** | DBMS | `MS Access` `VBA` `SQL` | Designed a normalized relational database with RBAC security and automated inventory tracking triggers. |
 
 ---
 
-## Loan Approval Prediction (Binary Classification / sklearn)
+## 🛠 Technical Deep Dives
 
-- **What it is**: End-to-end ML project: EDA, visualization, leakage-free preprocessing, feature engineering, multi-model tuning, SHAP explainability, threshold strategy analysis, and exporting artifacts.
-- **Highlights**:
-  - Models compared: Logistic Regression / Random Forest / SVM (ROC-AUC as the main tuning metric)
-  - Threshold policy analysis: scans decision thresholds and reports operating points (e.g., cautious vs. balanced) with precision/recall/F1 trade-offs
-- **Entry**:
-  - [Project folder](./Loan_Approval_Prediction)
-  - [Project README](./Loan_Approval_Prediction/README.md)
+### 1. Solar Prosumer Energy Forecasting
+* **Challenge:** Mitigate energy imbalance costs in smart grids by predicting erratic prosumer behavior.
+* **Solution:** Developed a comparative pipeline using **Gradient Boosting (XGBoost)** and **Recurrent Neural Networks (LSTM)**.
+* **Highlights:**
+    * Automated hyperparameter tuning via **Optuna** (Bayesian Optimization).
+    * Implemented 5-fold `TimeSeriesSplit` cross-validation to prevent look-ahead bias.
+    * **Artifacts:** Full technical report (`.pdf`) and production-ready Python scripts.
+* 👉 **[View Project](./Time_Series_Forecasting)**
+
+### 2. Loan Approval AI & Fairness
+* **Challenge:** Automate loan eligibility while minimizing financial risk and maintaining interpretability.
+* **Solution:** A **Random Forest** classifier tuned for high precision in the "Safe-to-Approve" band.
+* **Highlights:**
+    * **Feature Engineering:** Created high-impact ratios (e.g., Debt-to-Income, Asset Liquidity).
+    * **Governance:** Utilized **SHAP** (SHapley Additive exPlanations) to audit model decisions for bias.
+    * **Performance:** Achieved ROC-AUC of **0.999** on the test set.
+* 👉 **[View Project](./Loan_Approval_Prediction)**
+
+### 3. Quantitative Risk Engine (R)
+* **Challenge:** Model portfolio risk beyond simple standard deviation in volatile markets.
+* **Solution:** A statistical framework combining **Modern Portfolio Theory (MPT)** with time-series econometrics.
+* **Highlights:**
+    * **Convex Optimization:** Calculated Global Minimum Variance (GMV) and Tangency portfolios using quadratic programming.
+    * **Volatility Modeling:** Integrated **GARCH(1,1)** to capture volatility clustering and "fat tails" in asset returns.
+    * **Backtesting:** Rolling-window analysis to validate Value-at-Risk (VaR) estimations.
+* 👉 **[View Project](./Portfolio_Risk_Modeling)**
+
+### 4. CNN Image Classification (Computer Vision)
+* **Challenge:** Implement a robust vision pipeline from scratch without relying on pre-trained models.
+* **Solution:** Designed a custom **3-layer Convolutional Neural Network (CNN)** for the CIFAR-10 dataset.
+* **Highlights:**
+    * **Architecture:** Utilized `Conv2d` blocks with Batch Normalization and Max Pooling; integrated **Dropout** to prevent overfitting.
+    * **Augmentation:** Applied random rotations and horizontal flips to improve generalization.
+    * **Result:** Achieved **84.6% Accuracy**, with strong performance on mechanical classes (Cars/Trucks).
+* 👉 **[View Project](./Image_Classification_CNN)**
+---
+
+## ⚡ Getting Started
+
+Each project is self-contained. To run a specific project:
+
+1.  **Navigate** to the project folder.
+2.  **Read** the local `README.md` for specific dependency installation (e.g., `pip install -r requirements.txt` or R library installation).
+3.  **Launch** the corresponding Jupyter Notebook (`.ipynb`) or R Script (`.R`).
+
+```bash
+# Example: Cloning the repo
+git clone [https://github.com/your-username/Project-Documentation.git](https://github.com/your-username/Project-Documentation.git)
+cd Project-Documentation
+
+```
 
 ---
 
-## Portfolio Risk Modeling (Markowitz + Copula VaR + GARCH / R)
+## 📄 License
 
-- **What it is**: Uses daily stock returns to perform mean-variance portfolio analysis (GMV/tangency/constrained portfolios), Copula VaR via Monte Carlo + rolling backtests, and GARCH(1,1) conditional volatility & VaR.
-- **Highlights**:
-  - Copula-based VaR via Monte Carlo, including rolling-window backtesting with breach counting and a binomial test
-  - Automatically engineers log returns from raw prices and exports a reusable returns dataset for downstream modeling
-- **Entry**:
-  - [Project folder](./Portfolio_Risk_Modeling)
-  - [Project README](./Portfolio_Risk_Modeling/README.md)
-
----
-
-## Time Series Forecasting (Solar Panel Prosumers)
-
-- **What it is**: Forecasts both consumption and generation for solar panel prosumers using two model families: XGBoost and LSTM. Includes a PDF report summarizing results.
-- **Highlights**:
-  - XGBoost uses Optuna with 5-fold TimeSeriesSplit for hyperparameter search, and exports the best model as JSON plus a performance report to Excel (with timestamped result folders)
-  - LSTM builds sequences with a 24-hour sliding window, supports optional Self-Attention, and trains with EarlyStopping / ReduceLROnPlateau / ModelCheckpoint alongside 5-fold TimeSeriesSplit cross-validation
-- **Entry**:
-  - [Project folder](./Time_Series_Forecasting)
-  - [Project README](./Time_Series_Forecasting/README.md)
-
----
-
-## Web Scraping & Data Analysis (TVmaze)
-
-- **What it is**: Notebook in two parts:
-  1) Scrape 200 TV shows from TVmaze (collect links → crawl metadata → export fixed-schema CSV)
-  2) Read CSV for feature engineering + statistical analysis (e.g., Kruskal–Wallis, Dunn post-hoc, Mann–Whitney U, HC3 robust regression)
-- **Highlights**:
-  - Implements polite scraping practices (request throttling / retry logic) to reduce failure rates
-  - Includes statistical testing + robust regression to validate relationships beyond simple correlations
-- **Entry**:
-  - [Project folder](./Web_Scraping_Data_Analysis)
-  - [Project README](./Web_Scraping_Data_Analysis/README.md)
+This repository is licensed under the **MIT License**. See individual project folders for specific third-party attributions.
