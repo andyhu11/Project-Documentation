@@ -20,13 +20,13 @@ This repository serves as a centralized portfolio containing six production-grad
 ### 🤖 Classical Machine Learning
 | Project | Domain | Tech Stack | Key Impact |
 | :--- | :--- | :--- | :--- |
-| **[Loan Approval Prediction](./Loan_Approval_Prediction)** | FinTech / Risk | `Scikit-Learn` `SHAP` `Random Forest` | Built an automated underwriting system with **99.5% Precision** and **100% Recall**; integrated SHAP for regulatory explainability. |
-| **[TV Show Analytics](./Web_Scraping_Data_Analysis)** | Data Mining | `SciPy` `BeautifulSoup` `Statsmodels` | End-to-end scraper for 200+ shows; applied Kruskal-Wallis & Robust Regression to debunk "Golden Age" TV myths. |
+| **[Loan Approval Prediction](./Loan_Approval_Prediction)** | FinTech / Risk | `Scikit-Learn` `SHAP` `Random Forest` | Built an automated underwriting system with **99.25% Precision** and **100% Recall**; integrated SHAP for regulatory explainability. |
+| **[TV Show Analytics](./Web_Scraping_Data_Analysis)** | Data Mining | `SciPy` `BeautifulSoup` `Requests` | End-to-end scraper for 200+ shows; applied Kruskal-Wallis & Robust Regression to debunk "Golden Age" TV myths. |
 
 ### 📉 Quantitative Finance & Systems
 | Project | Domain | Tech Stack | Key Impact |
 | :--- | :--- | :--- | :--- |
-| **[Portfolio Risk Modeling](./Portfolio_Risk_Modeling)** | Quant Finance | `R` `GARCH` `Copula` | Implemented Mean-Variance optimization (Markowitz) and Dynamic Volatility forecasting using GARCH(1,1). |
+| **[Portfolio Risk Modeling](./Portfolio_Risk_Modeling)** | Quant Finance | `R` `GARCH` `Quadprog` | Implemented Mean-Variance optimization (Markowitz) and Dynamic Volatility forecasting using GARCH(1,1). |
 | **[UniBooks System](./Books_Management_System)** | DBMS | `MS Access` `VBA` `SQL` | Designed a normalized relational database with RBAC security and automated inventory tracking triggers. |
 
 ---
@@ -98,7 +98,7 @@ Each project is self-contained. To run a specific project:
 
 ```bash
 # Example: Cloning the repo
-git clone [https://github.com/your-username/Project-Documentation.git](https://github.com/your-username/Project-Documentation.git)
+git clone [https://github.com/andyhu11/Project-Documentation.git](https://github.com/andyhu11/Project-Documentation.git)
 cd Project-Documentation
 
 ```
@@ -110,7 +110,9 @@ cd Project-Documentation
 This repository is licensed under the **MIT License**. See individual project folders for specific third-party attributions.
 
 ---
+
 ## 📫 Connect with Me
+
 * **LinkedIn:** [Andy](https://linkedin.com/in/andy-hu-b00573349)
 * **Portfolio:** [github.com/andyhu11/Project-Documentation](https://github.com/andyhu11/Project-Documentation)
 * **Email:** jiahuiapply26@163.com
