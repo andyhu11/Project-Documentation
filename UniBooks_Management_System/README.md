@@ -1,5 +1,11 @@
 # UniBooks Management System
 
+![MS Access](https://img.shields.io/badge/Database-MS_Access_2016%2B-red?logo=microsoft-access&logoColor=white)
+![Language](https://img.shields.io/badge/Language-VBA%20%7C%20SQL-blue?logo=visual-basic-for-applications&logoColor=white)
+![Architecture](https://img.shields.io/badge/Architecture-Relational_DBMS-orange)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 > **A comprehensive relational database solution engineered for high-integrity bookstore inventory, sales, and personnel management.**
 
 ## 📖 Overview
