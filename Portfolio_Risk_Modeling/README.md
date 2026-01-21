@@ -65,13 +65,19 @@ The project generates high-fidelity plots to aid in quantitative decision-making
 
 Visualizes the trade-off between risk (Std Dev) and Return, highlighting the optimal GMV and Tangency points against simulated portfolios.
 
+![Efficient Frontier](./output_picture/EfficientFrontier_Simulated_GMV_Tangency.jpg)
+
 ### 2. Conditional Volatility
 
 Tracks how risk changes over time using GARCH(1,1), distinguishing between the stable GMV portfolio and the more volatile Tangency portfolio, identifying periods of market turmoil.
 
+![Conditional Volatility](./output_picture/ConditionalVolatility_GARCH11_GMV_Tangency.jpg)
+
 ### 3. Return Density
 
 Compares the distribution of asset returns against a standard normal distribution to visualize "fat tails" (Leptokurtosis) and skewness.
+
+![Return Density](./output_picture/ReturnDistributions_DailyLogReturns_Density.jpg)
 
 ---
 
