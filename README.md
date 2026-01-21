@@ -68,6 +68,24 @@ This repository serves as a centralized portfolio containing six production-grad
     * **Augmentation:** Applied random rotations and horizontal flips to improve generalization.
     * **Result:** Achieved **84.6% Accuracy**, with strong performance on mechanical classes (Cars/Trucks).
 * 👉 **[View Project](./Image_Classification_CNN)**
+
+### 5. Web Scraping & Statistical Analysis
+* **Challenge:** Validate cultural theories ("Golden Age of TV") using real-world unstructured data.
+* **Solution:** A dual-phase pipeline: **Automated Scraper** (Python/Requests) + **Statistical Inference** (SciPy).
+* **Highlights:**
+    * **Data Engineering:** Built a resilient scraper to harvest metadata for 200+ shows, handling retries and rate limiting.
+    * **Inference:** Applied non-parametric tests (**Mann-Whitney U**, **Kruskal-Wallis**) to handle non-normal rating distributions.
+    * **Insight:** Disproved "Longer is Better" myths using robust regression analysis.
+* 👉 **[View Project](./Web_Scraping_Data_Analysis)**
+
+### 6. UniBooks Management System (DBMS)
+* **Challenge:** Replace manual bookstore tracking with a scalable, atomic transaction system.
+* **Solution:** A relational database system built with **MS Access** and **VBA** automation.
+* **Highlights:**
+    * **Schema Design:** 3NF Normalized database ensuring data integrity across Inventory, Sales, and Procurement.
+    * **Automation:** VBA triggers for real-time stock level checks (`Inventory < Order_Qty` logic).
+    * **Analytics:** SQL-driven dashboards for "Best Sellers" and monthly revenue tracking.
+* 👉 **[View Project](./Books_Management_System)**
 ---
 
 ## ⚡ Getting Started
