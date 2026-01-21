@@ -57,7 +57,7 @@ Based on the empirical analysis of the harvested TVmaze dataset, this study chal
 | **Q3: Longevity Impact** | Linear Regression | **Non-Significant** | "Longer is Better" is rejected. Data follows a **non-linear** "Early Rise — Mid Plateau — Late Decline" curve. |
 
 <div align="center">
-  <img src="images/rating_distribution.png" width="80%" alt="Ratings by Decade">
+  <img src="../images/rating_distribution.png" width="80%" alt="Ratings by Decade">
 </div>
 
 **Figure 1 (Derived):** The analysis indicates that high ratings are not concentrated in long-running modern shows, but rather in completed series from specific historical decades, suggesting a strong "Survivor Bias" in retrospective ratings.
