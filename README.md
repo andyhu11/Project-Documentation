@@ -94,5 +94,5 @@ This repository is licensed under the **MIT License**. See individual project fo
 ---
 ## 📫 Connect with Me
 * **LinkedIn:** [Andy](https://linkedin.com/in/andy-hu-b00573349)
-* **Portfolio:** github.com/andyhu11/Project-Documentation (https://github.com/andyhu11/Project-Documentation)
+* **Portfolio:** [github.com/andyhu11/Project-Documentation] (https://github.com/andyhu11/Project-Documentation)
 * **Email:** jiahuiapply26@163.com
