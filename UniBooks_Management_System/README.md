@@ -1,40 +1,54 @@
 # UniBooks Management System
 
-> **A comprehensive database solution for efficient bookstore inventory, sales, and personnel management.**
+> **A comprehensive relational database solution engineered for high-integrity bookstore inventory, sales, and personnel management.**
 
 ## 📖 Overview
 
-**UniBooks** is a robust database management system built with **Microsoft Access**, designed to streamline the complex daily operations of a bookstore. By moving away from manual tracking, UniBooks ensures data integrity and operational efficiency.
+**UniBooks** is a robust Database Management System (DBMS) developed to digitize and optimize the complex operational workflows of modern bookstores. Addressing the inefficiencies of manual tracking, this solution leverages **Microsoft Access** and **VBA** to ensure atomic data consistency and operational scalability.
 
-The system manages the complete lifecycle of bookstore data—from supplier purchase orders to customer sales transactions—while providing management with actionable insights through dynamic reporting and trend analysis.
+The system encompasses the full data lifecycle—facilitating secure **Purchase Order** acquisitions and **Sell Order** transactions—while empowering stakeholders with actionable business intelligence through dynamic SQL-driven reporting and trend analysis.
 
 ---
 
 ## ✨ Key Features
 
-### 🛠 Core Operations
+### 🔐 Architecture & Security
 
-* **Secure Access Control:** Role-based login system ensures that sensitive data is protected and only accessible to authorized personnel.
-* **Transaction Management:** Dedicated interfaces for **Purchase Orders** (acquisitions) and **Sell Orders** (customer transactions).
-* **Automated Calculations:** Built-in engines automatically handle transaction totals and basic operational logic, reducing manual error.
-
-### 📊 Business Intelligence
-
-* **Dynamic Queries:**
-* **Best-Sellers:** Instantly identify the most popular books to optimize stock.
-* **Revenue Tracking:** Monitor monthly financial performance.
+* **Role-Based Access Control (RBAC):**
+* Secure login interface restricting system access based on user authorization levels.
+* Ensures data integrity by preventing unauthorized modifications to sensitive inventory records.
 
 
-* **Strategic Reporting:**
-* **Inventory Health:** Real-time reports (`BookCurrentStockAndStockLevel`) to prevent stockouts and overstocking.
-* **Staff Performance:** Employee ranking reports (`StaffSales TurnoverRank`) to track sales efficiency and incentivize performance.
+* **Relational Design:**
+* Normalized database schema designed to minimize redundancy and maintain referential integrity across Customer, Book, and Supplier entities.
 
 
-* **Visual Analytics:** Integrated charts for analyzing long-term sales trends.
 
-### 🔍 Utility
+### 🛠 Core Transaction Engines
 
-* **Quick Search:** Advanced search functionality to rapidly locate book details and inventory status.
+* **Automated Transaction Processing:**
+* **Purchase Orders:** Streamlined acquisition modules for managing supplier interactions.
+* **Sell Orders:** Customer-facing interface with built-in calculation engines for immediate total computation.
+
+
+* **VBA Automation:**
+* Event-driven procedures handle operational logic behind the scenes, significantly reducing manual calculation errors.
+
+
+
+### 📊 Analytics & Reporting Suite
+
+* **Dynamic SQL Queries:**
+* **Best-Seller Identification:** Aggregation algorithms to isolate high-velocity stock.
+* **Revenue Analytics:** Temporal queries to track financial performance on a monthly basis.
+
+
+* **Strategic Visualization:**
+* **Inventory Health Reports:** Real-time monitoring (`BookCurrentStockAndStockLevel`) to mitigate stockouts and overstock risks.
+* **Performance Metrics:** Staff ranking systems (`StaffSales TurnoverRank`) to quantify employee efficiency.
+* **Trend Analysis:** Integrated charting tools for visualizing long-term sales trajectories.
+
+
 
 ---
 
@@ -54,46 +68,50 @@ UniBooks_Management_System/
 
 ### Prerequisites
 
-* **Microsoft Access** (2016 or newer recommended).
-* **Windows OS** (Required for full VBA and Macro compatibility).
+* **Microsoft Access** (2016 or newer required).
+* **Windows OS** (Mandatory for full VBA/Macro execution support).
 
 ### Installation
 
-1. Clone this repository:
+1. **Clone the repository:**
 ```bash
-git clone https://github.com/your-username/Project-Documentation.git
+git clone https://github.com/your-username/UniBooks-System.git
+cd UniBooks_Management_System
 
 ```
 
 
-2. Navigate to the `UniBooks_Management_System` directory.
-3. Locate the file **`UniBooksManagementSystem.accdb`**.
+2. **Locate the binary:**
+Ensure `UniBooksManagementSystem.accdb` is present in the root directory.
 
 ### Usage Guide
 
-1. **Launch:** Double-click the `.accdb` file to start the application.
-2. **Authentication:** The system will launch a **Login Screen**. Please enter your credentials to proceed.
-3. **Navigation:** Use the main Switchboard to access the three core modules:
-* **Forms:** For data entry (Orders, Customers, Books).
-* **Reports:** For generating printable summaries.
-* **Charts:** For visual data analysis.
+1. **Initialization:**
+Double-click `UniBooksManagementSystem.accdb` to mount the database. *Note: You may need to "Enable Content" to allow VBA scripts to run.*
+2. **Authentication:**
+The system will initialize with a **Login Screen**. Enter valid credentials to access the Switchboard.
+3. **Operation Modules:**
+* **Forms:** Navigate to specific modules for data entry (Orders, Customers, Inventory).
+* **Reports/Charts:** Access the BI dashboard for printable summaries and visual analysis.
 
 
 
-> **Note:** For detailed operating procedures and technical specifications, please refer to the **[Operating Manual](https://www.google.com/search?q=./UniBooksManagementSystem_Operating%2520Manual.pdf)** included in this repository.
+> **Documentation:** For deep-dive technical specifications and user workflows, refer to the **[Operating Manual](./UniBooksManagementSystem_Operating%20Manual.pdf)** included in this repository.
 
 ---
 
 ## 🚧 Roadmap & Future Enhancements
 
-The following features are currently in the development pipeline to further enhance system automation and data integrity:
-
-* **Automated Discount Logic:**
-* Upgrade the Purchase Order module to automatically apply tiered discounts based on purchaser identity (Student vs. Publisher) and order volume.
+* **Logic Upgrade:**
+* **Dynamic Discounting:** Implementation of conditional logic in the Purchase Order module to auto-apply tiered discounts based on identity (Student/Publisher) and volume.
 
 
-* **Strict Inventory Validation:**
-* Implement VBA-based constraints in the Sell Order module to prevent transactions that exceed available stock, ensuring absolute inventory accuracy.
+* **Integrity Constraints:**
+* **Stock Validation:** Developing VBA-based pre-commit triggers to strictly prevent Sell Orders that exceed current inventory levels (`Inventory < Order_Qty`), ensuring absolute stock accuracy.
+
+
+* **UX Refinement:**
+* Migration to a fully modal interface for focused user interaction.
 
 
 
