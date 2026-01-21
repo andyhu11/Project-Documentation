@@ -44,10 +44,9 @@ Based on the empirical analysis of the **Enefit** dataset, the tuned XGBoost mod
 
 ### Model Comparison (Baseline vs. XGBoost)
 
-<p float="left">
-  <img src="../images/benchmark_consumption.png" width="49%" alt="Consumption Model Comparison" />
-  <img src="../images/benchmark_production.png" width="49%" alt="Production Model Comparison" />
-</p>
+| Consumption Model | Production Model |
+| :---: | :---: |
+| <img src="../images/benchmark_consumption.png" width="100%"> | <img src="../images/benchmark_production.png" width="100%"> |
 
 > **Figure 1:** Comparison of XGBoost against ARIMAX and SARIMAX baselines. Note the drastic reduction in MAPE (Mean Absolute Percentage Error) for the XGBoost model (Blue bar).
 
@@ -131,7 +130,7 @@ python Models/LSTM_consumption_model.py
 
 ```
 
-> **Note:** Detailed mathematical theory, feature importance heatmaps, and residual analysis can be found in the **[Project Report PDF](https://www.google.com/search?q=./Time%2520Series%2520Forecasting%2520of%2520Energy%2520Behavior%2520in%2520Solar%2520Panel%2520Prosumers.pdf)**.
+> **Note:** Detailed mathematical theory, feature importance heatmaps, and residual analysis can be found in the **[Project Report PDF](./Time_Series_Forecasting/Time%20Series%20Forecasting%20of%20Energy%20Behavior%20in%20Solar%20Panel%20Prosumers.pdf)**.
 
 ---
 
