@@ -36,7 +36,7 @@ Moving beyond simple Multi-Layer Perceptrons (MLPs), this solution leverages spa
 * **Efficient Loading:** Optimized `DataLoader` with `SubsetRandomSampler` for reproducible Train/Validation splits (20% validation).
 
 ### 📊 Training & Optimization
-* **Optimizer:** Trained using **Stochastic Gradient Descent (SGD)** with Nesterov Momentum (0.9) for escaping local minima.
+* **Optimizer:** Trained using **Stochastic Gradient Descent (SGD)** with Momentum (0.9) for escaping local minima.
 * **Checkpointing:** Implements a logic to track Validation Loss and automatically save the best model state (`best_cifar10_cnn.pt`) locally.
 * **Learning Rate Scheduler:** Configured with a fixed LR of 0.01, optimized for 30 epochs of training.
 
@@ -60,6 +60,7 @@ The table below breaks down the model's performance across individual categories
 | **Ship** | **89.70%** | 🟢 High Confidence |
 | **Truck** | **89.60%** | 🟢 High Confidence |
 | **Frog** | **89.20%** | 🟢 High Confidence |
+| **Deer** | **89.20%** | 🟢 High Confidence |
 | **Horse** | **84.90%** | 🟢 High Confidence |
 | **Dog** | **84.00%** | 🟢 High Confidence |
 | **Airplane** | **82.60%** | 🟡 Moderate |
