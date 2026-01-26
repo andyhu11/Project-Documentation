@@ -27,7 +27,7 @@ This repository serves as a centralized portfolio containing six production-grad
 | Project | Domain | Tech Stack | Key Impact |
 | :--- | :--- | :--- | :--- |
 | **[Portfolio Risk Modeling](./Portfolio_Risk_Modeling)** | Quant Finance | `R` `GARCH` `Quadprog` | Implemented Mean-Variance optimization (Markowitz) and Dynamic Volatility forecasting using GARCH(1,1). |
-| **[UniBooks System](./Books_Management_System)** | DBMS | `MS Access` `VBA` `SQL` | Designed a normalized relational database with RBAC security and automated inventory tracking triggers. |
+| **[UniBooks System](./UniBooks_Management_System)** | DBMS | `MS Access` `VBA` `SQL` | Designed a normalized relational database with RBAC security and automated inventory tracking triggers. |
 
 ---
 
