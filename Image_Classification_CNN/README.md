@@ -78,7 +78,6 @@ Image_Classification_CNN/
 ├── Image_Classification_CNN.ipynb  # Main Jupyter Notebook source code
 └── README.md                       # Project Documentation
 
-
 ```
 
 > **Runtime Artifacts:**
