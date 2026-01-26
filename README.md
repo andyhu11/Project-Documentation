@@ -85,7 +85,7 @@ This repository serves as a centralized portfolio containing six production-grad
     * **Schema Design:** 3NF Normalized database ensuring data integrity across Inventory, Sales, and Procurement.
     * **Automation:** VBA triggers for real-time stock level checks (`Inventory < Order_Qty` logic).
     * **Analytics:** SQL-driven dashboards for "Best Sellers" and monthly revenue tracking.
-* 👉 **[View Project](./Books_Management_System)**
+* 👉 **[View Project](./UniBooks_Management_System)**
 ---
 
 ## ⚡ Getting Started
